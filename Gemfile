@@ -34,6 +34,9 @@ gem 'jbuilder', '~> 2.5'
 gem 'react_on_rails', '~> 10.0', '>= 10.0.2'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'fog-aws', '~> 1.4', '>= 1.4.1'
+gem 'mini_magick', '~> 4.8'
+gem 'carrierwave', '~> 1.2', '>= 1.2.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
