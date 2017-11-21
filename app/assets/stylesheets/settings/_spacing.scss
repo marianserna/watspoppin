@@ -1,0 +1,28 @@
+$spacing-insane: 100px;
+$spacing-huge: 50px;
+$spacing-extra-large: 40px;
+$spacing-large: 30px;
+$spacing-medium-large: 25px;
+$spacing-medium: 20px;
+$spacing-small: 15px;
+$spacing-tiny: 10px;
+$spacing-min: 5px;
+$spacing-none: 0;
+
+// or
+
+$spacer: 1rem !default;
+$spacers: (
+    0: 0,
+    1: ($spacer * 0.25),
+    2: ($spacer * 0.5),
+    3: $spacer,
+    4: ($spacer * 1.5),
+    5: ($spacer * 3)
+  )
+  !default;
+
+// -------------------------------------
+//   Main Container
+// -------------------------------------
+$main-container-v-padding: map-get($spacers, 4);
