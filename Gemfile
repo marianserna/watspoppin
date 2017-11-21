@@ -45,6 +45,7 @@ group :development, :test do
   gem 'factory_bot_rails', '~> 4.8', '>= 4.8.2'
   gem 'guard-rspec', '~> 4.7', '>= 4.7.3'
   gem 'pry-rails', '~> 0.3.6'
+  gem 'dotenv-rails', '~> 2.2', '>= 2.2.1'
 end
 
 group :development do
