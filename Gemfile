@@ -37,6 +37,7 @@ gem 'react_on_rails', '~> 10.0', '>= 10.0.2'
 gem 'fog-aws', '~> 1.4', '>= 1.4.1'
 gem 'mini_magick', '~> 4.8'
 gem 'carrierwave', '~> 1.2', '>= 1.2.1'
+gem 'geocoder', '~> 1.4', '>= 1.4.4'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
