@@ -5,7 +5,7 @@ class CreateStories < ActiveRecord::Migration[5.1]
       t.text :content
       t.string :source
       t.string :image
-      t.float :lattitude
+      t.float :latitude
       t.float :longitude
 
       t.timestamps
