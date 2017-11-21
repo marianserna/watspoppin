@@ -4,7 +4,10 @@ import React from 'react';
 import Map from '../components/Map';
 
 export default class Home extends React.Component {
-  static propTypes = {};
+  static propTypes = {
+    latitude: PropTypes.number.isRequired,
+    longitude: PropTypes.number.isRequired
+  };
 
   /**
    * @param props - Comes from your rails view.
@@ -18,7 +21,10 @@ export default class Home extends React.Component {
   render() {
     return (
       <div>
-        <Map />
+        <Map
+          initialLat={this.props.latitude}
+          initialLng={this.props.longitude}
+        />
       </div>
     );
   }

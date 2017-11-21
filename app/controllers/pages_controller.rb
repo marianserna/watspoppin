@@ -5,8 +5,8 @@ class PagesController < ApplicationController
     result = request.location
 
     @props = {
-      latitude: result.latitude,
-      longitude: result.longitude
+      latitude: result.ip == '127.0.0.1' ? 43.653226 : result.latitude,
+      longitude: result.ip == '127.0.0.1' ? -79.383184 : result.longitude
     }
   end
 

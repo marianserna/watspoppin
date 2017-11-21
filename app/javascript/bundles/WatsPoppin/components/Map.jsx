@@ -5,7 +5,10 @@ import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import Pin from './Pin';
 
 export default class Map extends React.Component {
-  static propTypes = {};
+  static propTypes = {
+    initialLat: PropTypes.number.isRequired,
+    initialLng: PropTypes.number.isRequired
+  };
 
   constructor(props) {
     super(props);
@@ -14,12 +17,20 @@ export default class Map extends React.Component {
       viewport: {
         width: window.innerWidth,
         height: window.innerHeight,
-        latitude: 43.653226,
-        longitude: -79.383184,
+        latitude: props.initialLat,
+        longitude: props.initialLng,
         zoom: 8
       },
-      currentPosition: null
+      currentPosition: {
+        latitude: props.initialLat,
+        longitude: props.initialLng
+      }
     };
+
+    // Needed because initial marker(using geocoder position) wasnt showing until scroll
+    setTimeout(() => {
+      this.setState({});
+    }, 50);
   }
 
   getCurrentPosition = () => {
