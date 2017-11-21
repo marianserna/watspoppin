@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
+import Dimensions from 'react-dimensions';
 
 import Pin from './Pin';
 
-export default class Map extends React.Component {
+class Map extends React.Component {
   static propTypes = {
     initialLat: PropTypes.number.isRequired,
     initialLng: PropTypes.number.isRequired
@@ -15,8 +16,6 @@ export default class Map extends React.Component {
 
     this.state = {
       viewport: {
-        width: window.innerWidth,
-        height: window.innerHeight,
         latitude: props.initialLat,
         longitude: props.initialLng,
         zoom: 8
@@ -36,6 +35,11 @@ export default class Map extends React.Component {
   getCurrentPosition = () => {
     window.navigator.geolocation.getCurrentPosition(position => {
       this.setState({
+        viewport: {
+          ...this.state.viewport,
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude
+        },
         currentPosition: {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude
@@ -65,6 +69,8 @@ export default class Map extends React.Component {
     return (
       <ReactMapGL
         {...this.state.viewport}
+        width={this.props.containerWidth}
+        height={this.props.containerHeight}
         mapboxApiAccessToken="pk.eyJ1IjoibWFyaWFuc2VybmEiLCJhIjoiY2phOGtrcW43MDg5MTJxbGl1Nzg3aDA3ZCJ9.xKp2gqw1gEz0d1fmutdUpw"
         mapStyle="mapbox://styles/marianserna/cj9niotu73i7t2rs1mt2t14sy"
         onViewportChange={viewport => {
@@ -76,3 +82,6 @@ export default class Map extends React.Component {
     );
   }
 }
+
+// higher order component:
+export default Dimensions()(Map);

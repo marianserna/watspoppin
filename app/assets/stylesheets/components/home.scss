@@ -1,0 +1,23 @@
+.home_container {
+  position: relative;
+  display: flex;
+
+  img {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    width: 150px;
+    height: 150px;
+    z-index: 3;
+  }
+}
+
+.map_container {
+  width: 65vw;
+  height: 100vh;
+}
+
+.realtime_container {
+  width: 35vw;
+  height: 100vh;
+}

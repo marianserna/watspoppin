@@ -20,11 +20,16 @@ export default class Home extends React.Component {
 
   render() {
     return (
-      <div>
-        <Map
-          initialLat={this.props.latitude}
-          initialLng={this.props.longitude}
-        />
+      <div className="home_container">
+        <img src="logo.svg" alt="WatsPoppin logo" />
+
+        <section className="map_container">
+          <Map
+            initialLat={this.props.latitude}
+            initialLng={this.props.longitude}
+          />
+        </section>
+        <section className="realtime_container">Hello tweets</section>
       </div>
     );
   }

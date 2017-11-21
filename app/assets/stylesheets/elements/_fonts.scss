@@ -1,0 +1,10 @@
+body {
+  font-family: $body-font;
+  font-size: $body-font-size;
+}
+
+h1 {
+  font-size: $h1-font-size;
+  font-family: $headings-font;
+  padding: $spacing-small;
+}
