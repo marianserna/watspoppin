@@ -12,9 +12,16 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-     <p class="alert"><%= alert %></p>
-     
+    <div class="alerts">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+    </div>
+
+    <nav class="floating-nav">
+      <%= link_to 'Sign up', new_user_registration_path %>
+      <%= link_to 'Log in', new_user_session_path %>
+    </nav>
+
     <%= yield %>
   </body>
 </html>
