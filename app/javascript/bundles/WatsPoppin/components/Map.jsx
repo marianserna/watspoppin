@@ -16,7 +16,7 @@ export default class Map extends React.Component {
         height: window.innerHeight,
         latitude: 43.653226,
         longitude: -79.383184,
-        zoom: 10
+        zoom: 8
       },
       currentPosition: null
     };
