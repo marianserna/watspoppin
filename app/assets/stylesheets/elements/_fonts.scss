@@ -1,10 +1,11 @@
 body {
-  font-family: $body-font;
-  font-size: $body-font-size;
+  font-family: $body_font;
+  font-size: $body_font_size;
+  color: $body_font_color;
 }
 
 h1 {
-  font-size: $h1-font-size;
-  font-family: $headings-font;
-  padding: $spacing-small;
+  font-size: $h1_font_size;
+  font-family: $headings_font;
+  color: $headings_color;
 }

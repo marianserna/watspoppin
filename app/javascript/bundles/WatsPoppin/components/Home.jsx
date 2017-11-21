@@ -25,11 +25,15 @@ export default class Home extends React.Component {
 
         <section className="map_container">
           <Map
+            className="map"
             initialLat={this.props.latitude}
             initialLng={this.props.longitude}
           />
         </section>
-        <section className="realtime_container">Hello tweets</section>
+        <section className="realtime_container">
+          <h1>Hello Tweets</h1>
+          <p>Real time here</p>
+        </section>
       </div>
     );
   }

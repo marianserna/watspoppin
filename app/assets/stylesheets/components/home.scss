@@ -4,8 +4,8 @@
 
   img {
     position: absolute;
-    top: 30px;
-    left: 30px;
+    top: 15px;
+    left: 15px;
     width: 150px;
     height: 150px;
     z-index: 3;
@@ -13,11 +13,18 @@
 }
 
 .map_container {
+  background-color: $map_background_color;
   width: 65vw;
   height: 100vh;
+  padding: 50px;
+}
+
+.map {
+  opacity: 0.5;
 }
 
 .realtime_container {
   width: 35vw;
   height: 100vh;
+  padding: 50px;
 }
