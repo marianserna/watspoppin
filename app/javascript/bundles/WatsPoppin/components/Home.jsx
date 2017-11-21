@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import Map from '../components/Map';
+import Search from '../components/Search';
+import Socket from '../Socket';
 
 export default class Home extends React.Component {
   static propTypes = {
@@ -16,6 +18,10 @@ export default class Home extends React.Component {
     super(props);
 
     this.state = {};
+    this.socket = new Socket();
+    this.socket.setupSubscription(data => {
+      console.log(data);
+    });
   }
 
   render() {
@@ -32,7 +38,8 @@ export default class Home extends React.Component {
         </section>
         <section className="realtime_container">
           <h1>Hello Tweets</h1>
-          <p>Real time here</p>
+          <Search />
+          <section className="stories_container">RealTime here</section>
         </section>
       </div>
     );

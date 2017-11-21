@@ -3,6 +3,7 @@
   "private": true,
   "dependencies": {
     "@rails/webpacker": "^3.0.2",
+    "actioncable": "^5.1.4",
     "babel-preset-react": "^6.24.1",
     "coffeescript": "1.12.7",
     "prettier": "^1.8.2",
