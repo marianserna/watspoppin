@@ -9,7 +9,8 @@ import UserCard from './UserCard';
 class Map extends React.Component {
   static propTypes = {
     initialLat: PropTypes.number.isRequired,
-    initialLng: PropTypes.number.isRequired
+    initialLng: PropTypes.number.isRequired,
+    stories: PropTypes.array.isRequired
   };
 
   constructor(props) {
@@ -25,7 +26,8 @@ class Map extends React.Component {
         latitude: props.initialLat,
         longitude: props.initialLng
       },
-      popupStatus: null
+      popupStatus: null,
+      popupStory: null
     };
 
     // Needed because initial marker(using geocoder position) wasnt showing until scroll
@@ -91,6 +93,26 @@ class Map extends React.Component {
     }
   };
 
+  renderStoryMarkers = () => {
+    return this.props.stories.map(story => (
+      <Marker
+        latitude={story.latitude}
+        longitude={story.longitude}
+        key={story.id}
+      >
+        <Pin
+          fill="#600473"
+          onClick={() => {
+            this.setState({
+              popupStatus: 'story',
+              popupStory: story
+            });
+          }}
+        />
+      </Marker>
+    ));
+  };
+
   componentWillMount() {
     this.getCurrentPosition();
   }
@@ -109,6 +131,7 @@ class Map extends React.Component {
       >
         {this.renderCurrentPosition()}
         {this.renderPopUp()}
+        {this.renderStoryMarkers()}
       </ReactMapGL>
     );
   }

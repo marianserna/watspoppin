@@ -9,7 +9,8 @@ import Socket from '../Socket';
 export default class Home extends React.Component {
   static propTypes = {
     latitude: PropTypes.number.isRequired,
-    longitude: PropTypes.number.isRequired
+    longitude: PropTypes.number.isRequired,
+    stories: PropTypes.array.isRequired
   };
 
   /**
@@ -18,7 +19,9 @@ export default class Home extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      stories: props.stories
+    };
     this.socket = new Socket();
     this.socket.setupSubscription(data => {
       console.log(data);
@@ -35,6 +38,7 @@ export default class Home extends React.Component {
             className="map"
             initialLat={this.props.latitude}
             initialLng={this.props.longitude}
+            stories={this.state.stories}
           />
         </section>
         <section className="realtime_container">
@@ -43,7 +47,7 @@ export default class Home extends React.Component {
           <Search className="search" />
 
           <section className="stories_container">
-            <Realtime />
+            <Realtime stories={this.state.stories} />
           </section>
         </section>
       </div>
