@@ -4,6 +4,7 @@ import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import Dimensions from 'react-dimensions';
 
 import Pin from './Pin';
+import UserCard from './UserCard';
 
 class Map extends React.Component {
   static propTypes = {
@@ -18,12 +19,13 @@ class Map extends React.Component {
       viewport: {
         latitude: props.initialLat,
         longitude: props.initialLng,
-        zoom: 8
+        zoom: 12
       },
       currentPosition: {
         latitude: props.initialLat,
         longitude: props.initialLng
-      }
+      },
+      popupStatus: null
     };
 
     // Needed because initial marker(using geocoder position) wasnt showing until scroll
@@ -56,9 +58,37 @@ class Map extends React.Component {
         latitude={this.state.currentPosition.latitude}
         longitude={this.state.currentPosition.longitude}
       >
-        <Pin onClick={() => {}} />
+        <Pin
+          onClick={() => {
+            this.setState({
+              popupStatus: 'user'
+            });
+          }}
+        />
       </Marker>
     );
+  };
+
+  renderPopUp = () => {
+    const { popupStatus, currentPosition } = this.state;
+
+    if (!popupStatus) return false;
+
+    if (popupStatus === 'user') {
+      return (
+        <Popup
+          tipSize={5}
+          anchor="top"
+          longitude={currentPosition.longitude}
+          latitude={currentPosition.latitude}
+          onClose={() => this.setState({ popupStatus: null })}
+        >
+          <UserCard />
+        </Popup>
+      );
+    } else {
+      return null;
+    }
   };
 
   componentWillMount() {
@@ -78,6 +108,7 @@ class Map extends React.Component {
         }}
       >
         {this.renderCurrentPosition()}
+        {this.renderPopUp()}
       </ReactMapGL>
     );
   }

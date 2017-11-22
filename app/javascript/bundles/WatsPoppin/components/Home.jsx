@@ -3,6 +3,7 @@ import React from 'react';
 
 import Map from '../components/Map';
 import Search from '../components/Search';
+import Realtime from '../components/Realtime';
 import Socket from '../Socket';
 
 export default class Home extends React.Component {
@@ -27,7 +28,7 @@ export default class Home extends React.Component {
   render() {
     return (
       <div className="home_container">
-        <img src="logo.svg" alt="WatsPoppin logo" />
+        <img src="logo.svg" alt="WatsPoppin logo" id="logo" />
 
         <section className="map_container">
           <Map
@@ -38,8 +39,12 @@ export default class Home extends React.Component {
         </section>
         <section className="realtime_container">
           <h1>Hello Tweets</h1>
-          <Search />
-          <section className="stories_container">RealTime here</section>
+
+          <Search className="search" />
+
+          <section className="stories_container">
+            <Realtime />
+          </section>
         </section>
       </div>
     );
