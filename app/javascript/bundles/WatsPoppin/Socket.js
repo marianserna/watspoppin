@@ -5,10 +5,12 @@ export default class Socket {
     this.cable = ActionCable.createConsumer('/cable');
   }
   // onNewStories function comes from home component
-  setupSubscription = onNewStories => {
-    this.cable.subscriptions.create(
+  setupSubscription = (onNewStories, latitude, longitude) => {
+    this.subscription = this.cable.subscriptions.create(
       {
-        channel: 'StoriesChannel'
+        channel: 'StoriesChannel',
+        latitude: latitude,
+        longitude: longitude
       },
       {
         received: data => {
@@ -17,5 +19,12 @@ export default class Socket {
         }
       }
     );
+  };
+
+  update = (lat, lng) => {
+    this.subscription.send({
+      latitude: lat,
+      longitude: lng
+    });
   };
 }

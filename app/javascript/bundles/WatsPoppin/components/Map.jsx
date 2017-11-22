@@ -67,7 +67,8 @@ class Map extends React.Component {
   };
 
   renderPopUp = () => {
-    const { popupStatus, currentPosition } = this.state;
+    const { popupStatus } = this.state;
+    const { currentPosition } = this.props;
 
     if (!popupStatus) return false;
 
@@ -96,7 +97,7 @@ class Map extends React.Component {
         key={story.id}
       >
         <Pin
-          fill="#600473"
+          fill="#36F1CD"
           onClick={() => {
             this.setState({
               popupStatus: 'story',

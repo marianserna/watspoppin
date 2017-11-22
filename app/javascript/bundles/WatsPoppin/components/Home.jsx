@@ -27,9 +27,20 @@ export default class Home extends React.Component {
       stories: props.stories
     };
     this.socket = new Socket();
-    this.socket.setupSubscription(data => {
-      console.log(data);
-    });
+    this.socket.setupSubscription(
+      data => {
+        this.setState({ stories: [data, ...this.state.stories] });
+      },
+      this.state.currentPosition.latitude,
+      this.state.currentPosition.longitude
+    );
+  }
+
+  componentDidMount() {
+    this.socket.update(
+      this.state.currentPosition.latitude,
+      this.state.currentPosition.longitude
+    );
   }
 
   updateCurrentPosition = (lat, lng) => {
