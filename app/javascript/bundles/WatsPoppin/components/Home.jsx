@@ -20,6 +20,10 @@ export default class Home extends React.Component {
     super(props);
 
     this.state = {
+      currentPosition: {
+        latitude: props.latitude,
+        longitude: props.longitude
+      },
       stories: props.stories
     };
     this.socket = new Socket();
@@ -27,6 +31,15 @@ export default class Home extends React.Component {
       console.log(data);
     });
   }
+
+  updateCurrentPosition = (lat, lng) => {
+    this.setState({
+      currentPosition: {
+        latitude: lat,
+        longitude: lng
+      }
+    });
+  };
 
   render() {
     return (
@@ -36,8 +49,8 @@ export default class Home extends React.Component {
         <section className="map_container">
           <Map
             className="map"
-            initialLat={this.props.latitude}
-            initialLng={this.props.longitude}
+            currentPosition={this.state.currentPosition}
+            updateCurrentPosition={this.updateCurrentPosition}
             stories={this.state.stories}
           />
         </section>

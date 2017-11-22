@@ -10,7 +10,7 @@ export default class Realtime extends React.Component {
     return (
       <div>
         {this.props.stories.map(story => (
-          <figure key={story.id}>
+          <figure key={story.id} className="realtime_figure">
             <img src={story.image.thumb.url} alt={story.content} />
             <figcaption>{story.content.substring(0, 25)}...</figcaption>
           </figure>

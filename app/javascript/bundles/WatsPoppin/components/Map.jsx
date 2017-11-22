@@ -8,8 +8,7 @@ import UserCard from './UserCard';
 
 class Map extends React.Component {
   static propTypes = {
-    initialLat: PropTypes.number.isRequired,
-    initialLng: PropTypes.number.isRequired,
+    currentPosition: PropTypes.object.isRequired,
     stories: PropTypes.array.isRequired
   };
 
@@ -18,13 +17,9 @@ class Map extends React.Component {
 
     this.state = {
       viewport: {
-        latitude: props.initialLat,
-        longitude: props.initialLng,
+        latitude: props.currentPosition.latitude,
+        longitude: props.currentPosition.longitude,
         zoom: 12
-      },
-      currentPosition: {
-        latitude: props.initialLat,
-        longitude: props.initialLng
       },
       popupStatus: null,
       popupStory: null
@@ -43,22 +38,22 @@ class Map extends React.Component {
           ...this.state.viewport,
           latitude: position.coords.latitude,
           longitude: position.coords.longitude
-        },
-        currentPosition: {
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude
         }
       });
+      this.props.updateCurrentPosition(
+        position.coords.latitude,
+        position.coords.longitude
+      );
     });
   };
 
   renderCurrentPosition = () => {
-    if (!this.state.currentPosition) return false;
+    if (!this.props.currentPosition) return false;
 
     return (
       <Marker
-        latitude={this.state.currentPosition.latitude}
-        longitude={this.state.currentPosition.longitude}
+        latitude={this.props.currentPosition.latitude}
+        longitude={this.props.currentPosition.longitude}
       >
         <Pin
           onClick={() => {
