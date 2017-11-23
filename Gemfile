@@ -64,3 +64,6 @@ gem 'mini_racer', platforms: :ruby
 
 # Authentication with Devise
 gem 'devise'
+
+# Omniauth rubygems
+gem 'omniauth-facebook'
