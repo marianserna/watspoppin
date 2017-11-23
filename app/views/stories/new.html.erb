@@ -1,0 +1,20 @@
+<h2>Create new story</h2>
+
+<%= form_for @story do |f| %>
+
+  <p>
+    <%= f.label :image %>
+    <%= f.text_field :image %>
+  </p>
+
+  <p>
+    <%= f.label :content %>
+    <%= f.text_area :content %>
+  </p>
+
+  <p>
+    <%= f.submit "Create Story" %>
+  </p>
+
+
+<% end %>
