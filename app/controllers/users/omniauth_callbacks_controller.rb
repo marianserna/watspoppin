@@ -33,14 +33,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     set_flash_message :notice, :success, kind: "Facebook"
   end
 
+private
+
   def auth
     request.env['omniauth.auth']
   end
 
 end
-
-#<OmniAuth::AuthHash credentials=#<OmniAuth::AuthHash expires=true expires_at=1516591815 token="EAAcQqX2zhjwBAGBby56aXD4bR3UqWSZCsUWhomEn0HZCSnenmj4t6UGw46wji8iuwhz9aG5fY9HRZA13ic99tARjvDOpmdxnW1DMzyNe9PEim2oswO0WlnZBaztzjwerfy05erkmZA7TzVdnEHNZABYjakzIPFro0ZD">
-
-#extra=#<OmniAuth::AuthHash raw_info=#<OmniAuth::AuthHash email="e_scriba@hotmail.com" id="10160031216120179" name="Denis S.">>
-
-#info=#<OmniAuth::AuthHash::InfoHash email="e_scriba@hotmail.com" image="http://graph.facebook.com/v2.6/10160031216120179/picture" name="Denis S."> provider="facebook" uid="10160031216120179">
