@@ -9,12 +9,26 @@ export default class Realtime extends React.Component {
   render() {
     return (
       <div>
-        {this.props.stories.map(story => (
-          <figure key={story.id} className="realtime_figure">
-            <img src={story.image.thumb.url} alt={story.content} />
-            <figcaption>{story.content.substring(0, 25)}...</figcaption>
-          </figure>
-        ))}
+        <div className="stories">
+          {this.props.stories.map(story => (
+            <div key={story.id} className="realtime_story">
+              <img
+                className={story.image.thumb.url ? 'user_img' : 'default_img'}
+                src={
+                  story.image.thumb.url
+                    ? story.image.thumb.url
+                    : '/twitter-logo.svg'
+                }
+                alt={story.content}
+              />
+              <p>{story.content.substring(0, 600)}...</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="trends">
+          <p>TRENDING</p>
+        </div>
       </div>
     );
   }

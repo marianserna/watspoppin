@@ -29,16 +29,15 @@ export default class Search extends React.Component {
   render() {
     return (
       <div>
-        <p>Find out what's going on!</p>
         <form onSubmit={e => this.handleSubmit(e)}>
-          <label htmlFor="hashtag" />
           <input
             type="text"
-            id="hashtag"
-            placeholder="#hashtag"
+            className="hashtag"
+            placeholder="HASHTAG"
             ref={input => (this.hashtag = input)}
           />
           <Geosuggest
+            className="geosuggest"
             onSuggestSelect={suggest => {
               this.setState({
                 latitude: suggest.location.lat,
@@ -46,7 +45,9 @@ export default class Search extends React.Component {
               });
             }}
           />
-          <button type="submit">SERCH</button>
+          <button type="submit" className="search">
+            SEARCH
+          </button>
         </form>
       </div>
     );

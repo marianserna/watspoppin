@@ -18,6 +18,18 @@
   height: $total_height;
   padding: $spacing-huge;
   border-right: 3px solid #000;
+  position: relative;
+}
+
+.expand {
+  position: absolute;
+  top: 20px;
+  right: 50px;
+  font-size: $link_font_size;
+  text-decoration: none;
+  color: $highlight_text_color;
+  font-weight: bold;
+  background: transparent;
 }
 
 .map {
@@ -27,7 +39,9 @@
 .realtime_container {
   width: 35vw;
   height: $total_height;
-  padding: $spacing-huge;
+  overflow: scroll;
+  scroll-behavior: smooth;
+  background-color: #ab47bc;
 
   form {
     margin-bottom: 50px;

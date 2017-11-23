@@ -1,0 +1,20 @@
+form {
+  display: flex;
+  width: 100%;
+  border: solid 3px #000;
+  border-left: none;
+
+  .hashtag {
+    width: 40%;
+    border-right: solid 3px #000;
+  }
+
+  .geosuggest {
+    width: 40%;
+    border-right: solid 3px #000;
+  }
+
+  .search {
+    width: 20%;
+  }
+}

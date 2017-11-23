@@ -25,7 +25,7 @@ export default class Home extends React.Component {
       viewport: {
         latitude: props.latitude,
         longitude: props.longitude,
-        zoom: 12
+        zoom: 9
       },
       currentPosition: {
         latitude: props.latitude,
@@ -98,6 +98,8 @@ export default class Home extends React.Component {
         <img src="logo.svg" alt="WatsPoppin logo" id="logo" />
 
         <section className="map_container">
+          <button className="expand">FULL SCREEN</button>
+
           <Map
             className="map"
             viewport={this.state.viewport}
@@ -130,27 +132,23 @@ export default class Home extends React.Component {
 
             <section className="right-nav">
               <a href="#">
-                <div className="login">Login</div>
+                <div className="login">LOGIN</div>
               </a>
               <a href="#">
-                <div className="signup">Sign up</div>
+                <div className="signup">SIGN UP</div>
               </a>
             </section>
           </nav>
         </section>
 
         <section className="realtime_container">
-          <h1>Hello Tweets</h1>
-
           <Search
             className="search"
             search={this.search}
             currentPosition={this.state.currentPosition}
           />
 
-          <section className="stories_container">
-            <Realtime stories={this.state.stories} />
-          </section>
+          <Realtime className="realtime" stories={this.state.stories} />
         </section>
       </div>
     );
