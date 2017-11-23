@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
 
-  root to: 'pages#main'
+  root 'pages#main'
+
+  get '/stories/new' => 'stories#new'
+  post '/stories' => 'stories#create'
+
 end
