@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
+  mount ActionCable.server => '/cable'
 
   devise_for :users, controllers: {omniauth_callbacks: "users/omniauth_callbacks"}
 
   root 'pages#main'
 
-  get '/stories/new' => 'stories#new'
-  post '/stories' => 'stories#create'
+  resources :stories, only: [:new, :create] do
+    collection do
+      get :search
+    end
+  end
 
 end

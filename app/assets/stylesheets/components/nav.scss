@@ -1,1 +1,79 @@
+nav {
+  box-sizing: border-box;
+  z-index: 6;
+  position: fixed;
+  right: 37%;
+  bottom: $spacing-medium;
+  width: 25%;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $button_text_color;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  background: #4568dc; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #b06ab3,
+    #4568dc
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #b06ab3,
+    #4568dc
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
+  .left-nav {
+    width: 25%;
+    height: 100%;
+    border-right: 3px solid $button_text_color;
+  }
+
+  .middle-nav {
+    width: 25%;
+    height: 100%;
+    border-right: 3px solid $button_text_color;
+  }
+
+  .home-icon,
+  .pencil-icon {
+    width: 60px;
+    height: 60px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 5px;
+  }
+
+  .icon-text {
+    font-size: $span_font_size;
+    text-align: center;
+    color: $button_text_color;
+    margin-top: -4px;
+  }
+
+  .right-nav {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .login,
+    .signup {
+      width: 100%;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .login {
+      border-bottom: 3px solid $button_text_color;
+    }
+
+    a {
+      display: inline-block;
+      width: 100%;
+      text-decoration: none;
+      color: $button_text_color;
+    }
+  }
+}
