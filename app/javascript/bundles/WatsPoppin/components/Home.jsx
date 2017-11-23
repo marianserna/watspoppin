@@ -52,6 +52,10 @@ export default class Home extends React.Component {
     });
   };
 
+  search = (hashtag, location) => {
+    console.log(hashtag, location);
+  };
+
   render() {
     return (
       <div className="home_container">
@@ -68,7 +72,7 @@ export default class Home extends React.Component {
         <section className="realtime_container">
           <h1>Hello Tweets</h1>
 
-          <Search className="search" />
+          <Search className="search" search={this.search} />
 
           <section className="stories_container">
             <Realtime stories={this.state.stories} />
