@@ -8,9 +8,8 @@ class StoriesController < ApplicationController
     @story = Story.new
     @story.content = params[:story][:content]
     @story.image = params[:story][:image]
-    # @story.source =
-    # @story.latitude =
-    # @story.longitude =
+    @story.latitude = params[:story][:latitude]
+    @story.longitude = params[:story][:longitude]
 
     if @story.save
       flash.notice = 'Story created'
