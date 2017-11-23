@@ -5,6 +5,7 @@ import Dimensions from 'react-dimensions';
 
 import Pin from './Pin';
 import UserCard from './UserCard';
+import StoryCard from './StoryCard';
 
 class Map extends React.Component {
   static propTypes = {
@@ -67,7 +68,7 @@ class Map extends React.Component {
   };
 
   renderPopUp = () => {
-    const { popupStatus } = this.state;
+    const { popupStatus, popupStory } = this.state;
     const { currentPosition } = this.props;
 
     if (!popupStatus) return false;
@@ -84,8 +85,18 @@ class Map extends React.Component {
           <UserCard />
         </Popup>
       );
-    } else {
-      return null;
+    } else if (popupStatus === 'story') {
+      return (
+        <Popup
+          tipSize={5}
+          anchor="top"
+          longitude={popupStory.longitude}
+          latitude={popupStory.latitude}
+          onClose={() => this.setState({ popupStatus: null })}
+        >
+          <StoryCard story={popupStory} />
+        </Popup>
+      );
     }
   };
 
