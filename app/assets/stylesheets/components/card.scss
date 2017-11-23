@@ -24,8 +24,10 @@ figure {
   figcaption {
     color: #000;
     text-align: center;
-    font-weight: bold;
-    color: #69619b;
+    font-weight: lighter;
+    line-height: 25px;
+    font-size: $card_font_size;
+    color: #37474f;
     margin-top: 20px;
     max-width: 200px;
   }
