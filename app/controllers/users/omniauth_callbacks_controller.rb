@@ -23,8 +23,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         provider: auth.provider,
         uid: auth.uid,
         access_token: auth.credentials.access_token,
-        expires_at: Time.at(auth.credentials.expires_at),
-        auth: auth
+        expires_at: Time.at(auth.credentials.expires_at), #convert expiration date to a timestamp
+        auth: auth #save the hash for future consideration
       )
 
     end
@@ -36,7 +36,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 private
 
   def auth
-    request.env['omniauth.auth']
+    request.env['omniauth.auth'] # can print to console to see the result
   end
 
 end
