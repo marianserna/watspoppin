@@ -1,6 +1,11 @@
 class Service < ApplicationRecord
   belongs_to :user
 
+# Scopes
+  %w{ facebook twitter }.each { |provider|
+    scope provider, ->{ where(provider: provider)}
+  }
+
   def client
     send("#{provider}_client") #meta programing that sends calls to the provider_client's method
   end
@@ -14,6 +19,7 @@ class Service < ApplicationRecord
     super #return the new token that we just saved to database or return the old token
   end
 
+# Facebook Methods
   def facebook_client
     Koala::Facebook::API.new(access_token) #instansiate koala and pass in the access_token from the corresponding column in our model
   end
