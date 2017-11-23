@@ -10,18 +10,15 @@ import StoryCard from './StoryCard';
 class Map extends React.Component {
   static propTypes = {
     currentPosition: PropTypes.object.isRequired,
-    stories: PropTypes.array.isRequired
+    viewport: PropTypes.object.isRequired,
+    stories: PropTypes.array.isRequired,
+    updateViewport: PropTypes.func.isRequired
   };
 
   constructor(props) {
     super(props);
 
     this.state = {
-      viewport: {
-        latitude: props.currentPosition.latitude,
-        longitude: props.currentPosition.longitude,
-        zoom: 12
-      },
       popupStatus: null,
       popupStory: null
     };
@@ -34,12 +31,10 @@ class Map extends React.Component {
 
   getCurrentPosition = () => {
     window.navigator.geolocation.getCurrentPosition(position => {
-      this.setState({
-        viewport: {
-          ...this.state.viewport,
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude
-        }
+      this.props.updateViewport({
+        ...this.props.viewport,
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude
       });
       this.props.updateCurrentPosition(
         position.coords.latitude,
@@ -108,7 +103,7 @@ class Map extends React.Component {
         key={story.id}
       >
         <Pin
-          fill="#36F1CD"
+          fill="#00BCD4"
           onClick={() => {
             this.setState({
               popupStatus: 'story',
@@ -127,13 +122,13 @@ class Map extends React.Component {
   render() {
     return (
       <ReactMapGL
-        {...this.state.viewport}
+        {...this.props.viewport}
         width={this.props.containerWidth}
         height={this.props.containerHeight}
         mapboxApiAccessToken="pk.eyJ1IjoibWFyaWFuc2VybmEiLCJhIjoiY2phOGtrcW43MDg5MTJxbGl1Nzg3aDA3ZCJ9.xKp2gqw1gEz0d1fmutdUpw"
         mapStyle="mapbox://styles/marianserna/cj9niotu73i7t2rs1mt2t14sy"
         onViewportChange={viewport => {
-          this.setState({ viewport });
+          this.props.updateViewport(viewport);
         }}
       >
         {this.renderCurrentPosition()}

@@ -1,14 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Geosuggest from 'react-geosuggest';
 
 export default class Search extends React.Component {
   static propTypes = {
-    search: PropTypes.func.isRequired
+    search: PropTypes.func.isRequired,
+    currentPosition: PropTypes.object.isRequired
   };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      latitude: this.props.currentPosition.latitude,
+      longitude: this.props.currentPosition.longitude
+    };
+  }
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.search(this.hashtag.value, this.location.value);
+    this.props.search(
+      this.hashtag.value,
+      this.state.latitude,
+      this.state.longitude
+    );
   };
 
   render() {
@@ -23,11 +38,13 @@ export default class Search extends React.Component {
             placeholder="#hashtag"
             ref={input => (this.hashtag = input)}
           />
-          <input
-            type="text"
-            id="location"
-            placeholder="location"
-            ref={input => (this.location = input)}
+          <Geosuggest
+            onSuggestSelect={suggest => {
+              this.setState({
+                latitude: suggest.location.lat,
+                longitude: suggest.location.lng
+              });
+            }}
           />
           <button type="submit">SERCH</button>
         </form>

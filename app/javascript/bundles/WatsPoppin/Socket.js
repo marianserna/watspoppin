@@ -27,4 +27,8 @@ export default class Socket {
       longitude: lng
     });
   };
+
+  unsubscribe = () => {
+    this.subscription.unsubscribe();
+  };
 }

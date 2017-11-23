@@ -3,12 +3,6 @@
 @import 'settings/fonts';
 @import 'settings/spacing';
 
-@import 'components/home';
-@import 'components/geosuggest';
-@import 'components/nav';
-@import 'components/card';
-@import 'components/mapbox';
-
 @import 'tools/breakpoint_mixin';
 @import 'tools/button_mixin';
 
@@ -18,6 +12,12 @@
 
 @import 'elements/fonts';
 @import 'elements/links';
+
+@import 'components/home';
+@import 'components/geosuggest';
+@import 'components/nav';
+@import 'components/card';
+@import 'components/mapbox';
 
 @import 'objects/avatar';
 

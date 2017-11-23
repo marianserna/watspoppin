@@ -9,7 +9,7 @@ class PagesController < ApplicationController
     @props = {
       latitude: latitude,
       longitude: longitude,
-      stories: Story.near([latitude, longitude])
+      stories: Story.near([latitude, longitude]).last(100)
     }
   end
 

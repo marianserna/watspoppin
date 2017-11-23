@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import axios from 'axios';
+
 import Map from '../components/Map';
 import Search from '../components/Search';
 import Realtime from '../components/Realtime';
@@ -20,6 +22,11 @@ export default class Home extends React.Component {
     super(props);
 
     this.state = {
+      viewport: {
+        latitude: props.latitude,
+        longitude: props.longitude,
+        zoom: 12
+      },
       currentPosition: {
         latitude: props.latitude,
         longitude: props.longitude
@@ -52,8 +59,37 @@ export default class Home extends React.Component {
     });
   };
 
-  search = (hashtag, location) => {
-    console.log(hashtag, location);
+  updateViewport = viewport => {
+    this.setState({
+      viewport
+    });
+  };
+
+  search = (hashtag, latitude, longitude) => {
+    this.setState({
+      viewport: {
+        ...this.state.viewport,
+        latitude,
+        longitude
+      }
+    });
+
+    axios
+      .get('/stories/search', {
+        params: {
+          hashtag,
+          latitude,
+          longitude
+        }
+      })
+      .then(response => {
+        this.setState({ stories: response.data });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+    this.socket.unsubscribe();
   };
 
   render() {
@@ -64,15 +100,53 @@ export default class Home extends React.Component {
         <section className="map_container">
           <Map
             className="map"
+            viewport={this.state.viewport}
             currentPosition={this.state.currentPosition}
             updateCurrentPosition={this.updateCurrentPosition}
+            updateViewport={this.updateViewport}
             stories={this.state.stories}
           />
+
+          <nav>
+            <section className="left-nav">
+              <a href="#">
+                <img
+                  src="home-icon.svg"
+                  alt="home icon"
+                  className="home-icon"
+                />
+              </a>
+            </section>
+
+            <section className="middle-nav">
+              <a href="#">
+                <img
+                  src="pencil-icon.svg"
+                  alt="pencil icon"
+                  className="pencil-icon"
+                />
+              </a>
+            </section>
+
+            <section className="right-nav">
+              <a href="#">
+                <div className="login">Login</div>
+              </a>
+              <a href="#">
+                <div className="signup">Sign up</div>
+              </a>
+            </section>
+          </nav>
         </section>
+
         <section className="realtime_container">
           <h1>Hello Tweets</h1>
 
-          <Search className="search" search={this.search} />
+          <Search
+            className="search"
+            search={this.search}
+            currentPosition={this.state.currentPosition}
+          />
 
           <section className="stories_container">
             <Realtime stories={this.state.stories} />
