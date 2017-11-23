@@ -9,6 +9,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     if service.present? #if the service exists
 
       user = service.user #set the user to the service's user
+      service.update(
+        expires_at: Time.at(auth.credentials.expires_at),
+        access_token: auth_credentials.token
+      ) # update the credentials to the newest ones on every log in
 
     else  # if doesnt exist, create the user
 
