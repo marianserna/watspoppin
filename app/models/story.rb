@@ -3,4 +3,5 @@ class Story < ApplicationRecord
   reverse_geocoded_by :latitude, :longitude
 
   has_and_belongs_to_many :hashtags
+  belongs_to :user
 end
