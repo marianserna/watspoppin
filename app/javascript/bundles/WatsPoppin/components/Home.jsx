@@ -117,6 +117,7 @@ export default class Home extends React.Component {
                   alt="home icon"
                   className="home-icon"
                 />
+                <p className="icon-text">HOME</p>
               </a>
             </section>
 
@@ -127,6 +128,7 @@ export default class Home extends React.Component {
                   alt="pencil icon"
                   className="pencil-icon"
                 />
+                <p className="icon-text">STORY</p>
               </a>
             </section>
 
