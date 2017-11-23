@@ -3,6 +3,10 @@
 <%= form_for @story do |f| %>
 
   <p>
+    <input id="pac-input" type="text" placeholder="Search Box" style="width:400px;">
+  </p>
+
+  <p>
     <%= f.label :image %>
     <%= f.text_field :image %>
   </p>
@@ -18,3 +22,13 @@
 
 
 <% end %>
+
+<script>
+const autocompleteFormField = document.getElementById(`pac-input`);
+
+const autocomplete = new google.maps.places.Autocomplete((autocompleteFormField), {
+  types: [`address`]
+  //componentRestrictions: [`us`]
+});
+
+</script>
