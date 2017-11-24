@@ -12,7 +12,8 @@ export default class Home extends React.Component {
   static propTypes = {
     latitude: PropTypes.number.isRequired,
     longitude: PropTypes.number.isRequired,
-    stories: PropTypes.array.isRequired
+    stories: PropTypes.array.isRequired,
+    trending_hashtags: PropTypes.array.isRequired
   };
 
   /**
@@ -27,6 +28,7 @@ export default class Home extends React.Component {
         longitude: props.longitude,
         zoom: 9
       },
+      mapExpanded: false,
       currentPosition: {
         latitude: props.latitude,
         longitude: props.longitude
@@ -65,7 +67,15 @@ export default class Home extends React.Component {
     });
   };
 
-  search = (hashtag, latitude, longitude) => {
+  search = (hashtag, latitude = null, longitude = null) => {
+    if (!latitude) {
+      latitude = this.state.currentPosition.latitude;
+    }
+
+    if (!longitude) {
+      longitude = this.state.currentPosition.longitude;
+    }
+
     this.setState({
       viewport: {
         ...this.state.viewport,
@@ -97,8 +107,21 @@ export default class Home extends React.Component {
       <div className="home_container">
         <img src="logo.svg" alt="WatsPoppin logo" id="logo" />
 
-        <section className="map_container">
-          <button className="expand">FULL SCREEN</button>
+        <section
+          className={`map_container ${
+            this.state.mapExpanded ? 'map_expanded' : ''
+          }`}
+        >
+          <button
+            className="expand"
+            onClick={e => {
+              this.setState({ mapExpanded: !this.state.mapExpanded });
+
+              window.dispatchEvent(new Event('resize'));
+            }}
+          >
+            {this.state.mapExpanded ? 'COLLAPSE' : 'EXPAND'}
+          </button>
 
           <Map
             className="map"
@@ -108,49 +131,25 @@ export default class Home extends React.Component {
             updateViewport={this.updateViewport}
             stories={this.state.stories}
           />
-
-          <nav>
-            <section className="left-nav">
-              <a href="#">
-                <img
-                  src="home-icon.svg"
-                  alt="home icon"
-                  className="home-icon"
-                />
-                <p className="icon-text">HOME</p>
-              </a>
-            </section>
-
-            <section className="middle-nav">
-              <a href="#">
-                <img
-                  src="pencil-icon.svg"
-                  alt="pencil icon"
-                  className="pencil-icon"
-                />
-                <p className="icon-text">STORY</p>
-              </a>
-            </section>
-
-            <section className="right-nav">
-              <a href="#">
-                <div className="login">LOGIN</div>
-              </a>
-              <a href="#">
-                <div className="signup">SIGN UP</div>
-              </a>
-            </section>
-          </nav>
         </section>
 
-        <section className="realtime_container">
+        <section
+          className={`realtime_container ${
+            this.state.mapExpanded ? 'map_expanded' : ''
+          }`}
+        >
           <Search
             className="search"
             search={this.search}
             currentPosition={this.state.currentPosition}
           />
 
-          <Realtime className="realtime" stories={this.state.stories} />
+          <Realtime
+            className="realtime"
+            stories={this.state.stories}
+            trending_hashtags={this.props.trending_hashtags}
+            search={this.search}
+          />
         </section>
       </div>
     );

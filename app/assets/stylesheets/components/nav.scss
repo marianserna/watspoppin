@@ -59,13 +59,18 @@ nav {
     flex-direction: column;
 
     .login,
-    .signup {
+    .signup,
+    .logout,
+    .edit {
+      display: block;
+      text-decoration: none;
       width: 100%;
       padding: 10px;
       text-align: center;
     }
 
-    .login {
+    .login,
+    .edit {
       border-bottom: 3px solid $button_text_color;
     }
 
