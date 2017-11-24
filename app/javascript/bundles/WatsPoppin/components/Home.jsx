@@ -28,6 +28,7 @@ export default class Home extends React.Component {
         longitude: props.longitude,
         zoom: 9
       },
+      mapExpanded: false,
       currentPosition: {
         latitude: props.latitude,
         longitude: props.longitude
@@ -106,8 +107,21 @@ export default class Home extends React.Component {
       <div className="home_container">
         <img src="logo.svg" alt="WatsPoppin logo" id="logo" />
 
-        <section className="map_container">
-          <button className="expand">FULL SCREEN</button>
+        <section
+          className={`map_container ${
+            this.state.mapExpanded ? 'map_expanded' : ''
+          }`}
+        >
+          <button
+            className="expand"
+            onClick={e => {
+              this.setState({ mapExpanded: !this.state.mapExpanded });
+
+              window.dispatchEvent(new Event('resize'));
+            }}
+          >
+            {this.state.mapExpanded ? 'COLLAPSE' : 'EXPAND'}
+          </button>
 
           <Map
             className="map"
@@ -119,7 +133,11 @@ export default class Home extends React.Component {
           />
         </section>
 
-        <section className="realtime_container">
+        <section
+          className={`realtime_container ${
+            this.state.mapExpanded ? 'map_expanded' : ''
+          }`}
+        >
           <Search
             className="search"
             search={this.search}

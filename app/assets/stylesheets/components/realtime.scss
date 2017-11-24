@@ -9,7 +9,6 @@
   .realtime_story {
     background-color: #fff;
     border: 3px solid #000;
-    // overflow: hidden;
     margin: 10px;
     width: calc(50% - 40px);
     padding: 10px;
@@ -44,10 +43,13 @@
   position: fixed;
   bottom: 0px;
   right: 0px;
-  height: 80px;
+  height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  overflow-y: scroll;
 
   p {
     font-weight: 900;
@@ -64,5 +66,23 @@
     ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+  }
+
+  .trending_hashtags {
+    margin-top: 30px;
+
+    ul li a {
+      text-decoration: none;
+      line-height: 25px;
+      color: #fff;
+    }
+  }
+
+  &.collapsed {
+    height: 80px;
+
+    .trending_hashtags {
+      display: none;
+    }
   }
 }

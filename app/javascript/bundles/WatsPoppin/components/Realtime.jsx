@@ -8,8 +8,17 @@ export default class Realtime extends React.Component {
     search: PropTypes.func.isRequired
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      collapsed: true
+    };
+  }
+
   triggerSearch = (e, trend) => {
     e.preventDefault();
+    e.stopPropagation();
     this.props.search(trend);
   };
 
@@ -28,12 +37,21 @@ export default class Realtime extends React.Component {
                 }
                 alt={story.content}
               />
+              <p className="handle">{story.handle}</p>
               <p>{story.content.substring(0, 600)}...</p>
             </div>
           ))}
         </div>
 
-        <div className="trends">
+        <div
+          className={`trends ${this.state.collapsed ? 'collapsed' : ''}`}
+          onClick={e => {
+            e.preventDefault();
+            this.setState({
+              collapsed: !this.state.collapsed
+            });
+          }}
+        >
           <p>TRENDING</p>
 
           <section className="trending_hashtags">
