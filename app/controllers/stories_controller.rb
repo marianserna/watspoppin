@@ -22,10 +22,27 @@ class StoriesController < ApplicationController
   end
 
   def search
-    twitter_searcher = TwitterSearcher.new(params[:hashtag], params[:latitude], params[:longitude])
-    twitter_searcher.search
+    begin
+      twitter_searcher = TwitterSearcher.new(params[:hashtag], params[:latitude], params[:longitude])
+      twitter_searcher.search
+    rescue Twitter::Error::TooManyRequests
+      puts 'Twitter too many requests'
+    end
 
-    @stories = Story.near([params[:latitude], params[:longitude]]).last(100)
+    # begin
+    #   instagram_searcher = InstagramSearcher.new(params[:hashtag], params[:latitude], params[:longitude])
+    #   instagram_searcher.search
+    # rescue Instagram::BadRequest
+    # end
+
+    @hashtag = Hashtag.find_by(name: params[:hashtag].downcase.delete('#'))
+
+    if @hashtag
+      @stories = @hashtag.stories.near([params[:latitude], params[:longitude]]).last(100)
+    else
+      @stories = Story.near([params[:latitude], params[:longitude]]).last(100)
+    end
+
     render json: @stories
   end
 

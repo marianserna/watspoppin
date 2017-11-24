@@ -8,7 +8,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'watspoppin-bundle' %>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIxG73uhec1_rmjlquh4H0xyNBm_Sb0sk&libraries=places"></script> 
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIxG73uhec1_rmjlquh4H0xyNBm_Sb0sk&libraries=places"></script>
 
     <link href="https://fonts.googleapis.com/css?family=Abel|Happy+Monkey" rel="stylesheet">
   </head>
@@ -19,14 +19,37 @@
       <% if alert %><p class="alert"><%= alert %></p> <% end %>
     </div>
 
-    <nav class="floating-nav">
-      <% if user_signed_in? %>  <%# this is a devise method that checks if the user is signed in or not %>
-        <%= link_to  "Log Out", destroy_user_session_path, method: :delete%> <%# devise requires a delete http request to log out so it is controlled by this app and not another app, security feature %>
-        <%= link_to current_user.name, edit_user_registration_path %>
-      <% else %>
-        <%= link_to 'Sign up', new_user_registration_path %>
-        <%= link_to 'Log in', new_user_session_path %>
-      <% end %>
+    <nav>
+      <section class="left-nav">
+        <a href="<%= root_url %>">
+          <img
+            src="/home-icon.svg"
+            alt="home icon"
+            class="home-icon"
+          />
+          <p class="icon-text">HOME</p>
+        </a>
+      </section>
+
+      <section class="middle-nav">
+        <a href="<%= new_story_url %>">
+          <img
+            src="/pencil-icon.svg"
+            alt="pencil icon"
+            class="pencil-icon"
+          />
+          <p class="icon-text">STORY</p>
+        </a>
+      </section>
+      <section class="right-nav">
+        <% if user_signed_in? %>  <%# this is a devise method that checks if the user is signed in or not %>
+          <%= link_to current_user.name, edit_user_registration_path, class: "edit" %>
+          <%= link_to  "Log Out", destroy_user_session_path, method: :delete, class: "logout"%> <%# devise requires a delete http request to log out so it is controlled by this app and not another app, security feature %>
+        <% else %>
+          <%= link_to 'Sign up', new_user_registration_path, class: "login" %>
+          <%= link_to 'Log in', new_user_session_path, class: "signup" %>
+        <% end %>
+      </section>
     </nav>
 
     <%= yield %>
