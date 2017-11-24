@@ -40,6 +40,7 @@ gem 'carrierwave', '~> 1.2', '>= 1.2.1'
 gem 'geocoder', '~> 1.4', '>= 1.4.4'
 gem 'celluloid-io', '~> 0.17.3'
 gem 'twitter', '~> 6.2'
+gem 'instagram', '~> 1.1', '>= 1.1.6'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
