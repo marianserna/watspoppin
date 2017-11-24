@@ -8,9 +8,10 @@ class StoriesController < ApplicationController
     @story = Story.new
     @story.content = params[:story][:content]
     @story.image = params[:story][:image]
-    # @story.source =
-    # @story.latitude =
-    # @story.longitude =
+    @story.latitude = params[:story][:latitude]
+    @story.longitude = params[:story][:longitude]
+    #@story.user_id = current_user.id
+    @story.source = "watspoppin"
 
     if @story.save
       flash.notice = 'Story created'
@@ -19,6 +20,7 @@ class StoriesController < ApplicationController
       flash.alert = 'Story could not be created. Please correct and try again.'
       render 'new'
     end
+
   end
 
   def search
@@ -44,6 +46,7 @@ class StoriesController < ApplicationController
     end
 
     render json: @stories
+
   end
 
 end
