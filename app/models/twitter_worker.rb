@@ -36,21 +36,9 @@ class TwitterWorker
 
     client.filter({locations: locations, language: 'en'}) do |tweet|
       puts tweet.inspect
+      story = Story.save_tweet(tweet)
 
-      if tweet.is_a?(Twitter::Tweet) && !tweet.retweeted_status? && tweet.geo?
-        story = Story.new({
-          content: tweet.text,
-          source: 'Twitter',
-          longitude: tweet.geo.longitude,
-          latitude: tweet.geo.latitude
-        })
-
-        if tweet.media.any?
-          story.remote_image_url = tweet.media.first.media_uri_https.to_s
-        end
-
-        story.save!
-        
+      if story
         ActionCable.server.broadcast('stories_channel', story)
       end
     end
