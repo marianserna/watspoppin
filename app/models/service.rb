@@ -10,7 +10,7 @@ class Service < ApplicationRecord
     send("#{provider}_client") #meta programing that sends calls to the provider_client's method
   end
 
-  def expired
+  def expired?
     expires_at? && expires_at <= Time.zone.now # if expiration date exists and is less than now
   end
 
