@@ -25,7 +25,15 @@ class StoriesController < ApplicationController
     twitter_searcher = TwitterSearcher.new(params[:hashtag], params[:latitude], params[:longitude])
     twitter_searcher.search
 
-    @stories = Story.near([params[:latitude], params[:longitude]]).last(100)
+    @hashtag = Hashtag.find_by(name: params[:hashtag].downcase)
+
+    if @hashtag
+      @stories = @hashtag.stories.near([params[:latitude], params[:longitude]]).last(100)
+    else
+      @stories = Story.near([params[:latitude], params[:longitude]]).last(100)
+    end
+
+
     render json: @stories
   end
 
