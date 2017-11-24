@@ -13,6 +13,44 @@
   </head>
 
   <body>
+    <div class="alerts">
+      <% if notice  %> <p class="notice"><%= notice %></p> <% end %>
+      <% if alert %><p class="alert"><%= alert %></p> <% end %>
+    </div>
+
+    <nav>
+      <section class="left-nav">
+        <a href="<%= root_url %>">
+          <img
+            src="/home-icon.svg"
+            alt="home icon"
+            class="home-icon"
+          />
+          <p class="icon-text">HOME</p>
+        </a>
+      </section>
+
+      <section class="middle-nav">
+        <a href="<%= new_story_url %>">
+          <img
+            src="/pencil-icon.svg"
+            alt="pencil icon"
+            class="pencil-icon"
+          />
+          <p class="icon-text">STORY</p>
+        </a>
+      </section>
+      <section class="right-nav">
+        <% if user_signed_in? %>  <%# this is a devise method that checks if the user is signed in or not %>
+          <%= link_to current_user.name, edit_user_registration_path, class: "edit" %>
+          <%= link_to  "Log Out", destroy_user_session_path, method: :delete, class: "logout"%> <%# devise requires a delete http request to log out so it is controlled by this app and not another app, security feature %>
+        <% else %>
+          <%= link_to 'Sign up', new_user_registration_path, class: "login" %>
+          <%= link_to 'Log in', new_user_session_path, class: "signup" %>
+        <% end %>
+      </section>
+    </nav>
+
     <%= yield %>
   </body>
 </html>

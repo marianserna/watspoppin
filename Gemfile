@@ -38,6 +38,9 @@ gem 'fog-aws', '~> 1.4', '>= 1.4.1'
 gem 'mini_magick', '~> 4.8'
 gem 'carrierwave', '~> 1.2', '>= 1.2.1'
 gem 'geocoder', '~> 1.4', '>= 1.4.4'
+gem 'celluloid-io', '~> 0.17.3'
+gem 'twitter', '~> 6.2'
+gem 'instagram', '~> 1.1', '>= 1.1.6'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -46,6 +49,7 @@ group :development, :test do
   gem 'factory_bot_rails', '~> 4.8', '>= 4.8.2'
   gem 'guard-rspec', '~> 4.7', '>= 4.7.3'
   gem 'pry-rails', '~> 0.3.6'
+  gem 'dotenv-rails', '~> 2.2', '>= 2.2.1'
 end
 
 group :development do
@@ -61,3 +65,12 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'mini_racer', platforms: :ruby
+
+# Authentication with Devise
+gem 'devise'
+
+# Omniauth rubygems
+gem 'omniauth-facebook'
+
+# Facebook Koala
+gem 'koala'
