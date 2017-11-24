@@ -1,0 +1,90 @@
+.form_background {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+
+  .topColor {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    background-color: #ab47bc;
+
+    height: 50vh;
+  }
+
+  .bottomColor {
+    background-color: #fff;
+    height: 50vh;
+  }
+}
+
+.new_user {
+  border: none;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.login_form {
+  position: absolute;
+  top: 20vh;
+  margin: 0 auto;
+  padding-top: 100px;
+  width: 40vw;
+  left: 30vw;
+  background-color: #fff;
+  border: 3px solid #000;
+  min-height: 60vh;
+  text-align: center;
+
+  h2 {
+    margin-bottom: 50px;
+    color: #0080ff;
+  }
+
+  .login {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+
+    .field {
+      width: 100%;
+    }
+  }
+
+  input[class='field'] {
+    border: 3px solid #000;
+    width: 70%;
+    height: 60px;
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    color: $highlight_text_color;
+    font-family: $body_font;
+    font-size: $button_font_size;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px white inset;
+    background-color: #fff !important;
+  }
+
+  label {
+    display: inline-block;
+    font-family: $body_font;
+    font-size: $card_font_size;
+    margin-bottom: 30px;
+  }
+
+  input[type='submit'] {
+    border: 3px solid #000;
+    width: 40%;
+    background-color: #fff;
+    height: 60px;
+    background-color: #8c95aa;
+  }
+}
