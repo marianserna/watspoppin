@@ -3,7 +3,14 @@ import PropTypes from 'prop-types';
 
 export default class Realtime extends React.Component {
   static propTypes = {
-    stories: PropTypes.array.isRequired
+    stories: PropTypes.array.isRequired,
+    trending_hashtags: PropTypes.array.isRequired,
+    search: PropTypes.func.isRequired
+  };
+
+  triggerSearch = (e, trend) => {
+    e.preventDefault();
+    this.props.search(trend);
   };
 
   render() {
@@ -28,6 +35,18 @@ export default class Realtime extends React.Component {
 
         <div className="trends">
           <p>TRENDING</p>
+
+          <section className="trending_hashtags">
+            <ul>
+              {this.props.trending_hashtags.map(trend => (
+                <li key={trend}>
+                  <a href="#" onClick={e => this.triggerSearch(e, trend)}>
+                    {trend}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
         </div>
       </div>
     );

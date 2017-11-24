@@ -1,8 +1,8 @@
-class TwitterSearcher
-  attr_accessor :hashtag, :latitude, :longitude, :client
+class TwitterTrends
 
-  def initialize(hashtag, latitude, longitude)
-    @hashtag = hashtag
+  attr_accessor :latitude, :longitude
+
+  def initialize(latitude, longitude)
     @latitude = latitude
     @longitude = longitude
 
@@ -14,9 +14,11 @@ class TwitterSearcher
     end
   end
 
-  def search
-    client.search(hashtag, geocode: "#{latitude},#{longitude},50km").each do |tweet|
-      Story.save_tweet(tweet)
-    end
+  def trends
+    place = @client.trends_closest({lat: latitude, long: longitude}).first
+    @client.trends(place.id).to_a.map(&:name).select { |trend|
+      trend.starts_with?('#')
+    }
   end
+
 end

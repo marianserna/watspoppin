@@ -26,6 +26,7 @@ class StoriesController < ApplicationController
       twitter_searcher = TwitterSearcher.new(params[:hashtag], params[:latitude], params[:longitude])
       twitter_searcher.search
     rescue Twitter::Error::TooManyRequests
+      puts 'Twitter too many requests'
     end
 
     # begin
@@ -34,7 +35,7 @@ class StoriesController < ApplicationController
     # rescue Instagram::BadRequest
     # end
 
-    @hashtag = Hashtag.find_by(name: params[:hashtag].downcase)
+    @hashtag = Hashtag.find_by(name: params[:hashtag].downcase.delete('#'))
 
     if @hashtag
       @stories = @hashtag.stories.near([params[:latitude], params[:longitude]]).last(100)
