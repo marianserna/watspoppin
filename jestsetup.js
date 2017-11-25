@@ -1,3 +1,7 @@
+import 'babel-polyfill';
+import 'raf/polyfill';
+import 'core-js/es6/map';
+import 'core-js/es6/set';
 import React from 'react';
 import Enzyme, { shallow, render, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';

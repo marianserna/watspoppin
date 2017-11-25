@@ -12,7 +12,8 @@ class PagesController < ApplicationController
       latitude: latitude,
       longitude: longitude,
       stories: Story.near([latitude, longitude]).last(100),
-      trending_hashtags: twitter_trends.trends
+      trending_hashtags: twitter_trends.trends,
+      user: current_user
     }
   end
 
