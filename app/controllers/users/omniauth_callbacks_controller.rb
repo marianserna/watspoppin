@@ -8,44 +8,40 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   #look up existing user with a provider account or we create a new user with this account
 
   def facebook
-
-    if service.present? #if the service exists
-
-      user = service.user #set the user to the service's user
-      service.update(
-        expires_at: Time.at(auth.credentials.expires_at),
-        access_token: auth.credentials.token
-      ) # update the credentials to the newest ones on every log in
-
-    else
-
-      # create the service associated with the user from the oauth hash, we pull the data from the oauth response hash that we printed to the console
-      user.services.create(
-        provider: auth.provider,
-        uid: auth.uid,
-        access_token: auth.credentials.access_token,
-        expires_at: Time.at(auth.credentials.expires_at), #convert expiration date to a timestamp
-        auth: auth #save the hash for future consideration
-      )
-
-    end
-
-    sign_in_and_redirect user, event: :authentication
-    set_flash_message :notice, :success, kind: "Facebook"
+    handle_auth "Facebook"
   end
 
   def twitter
-    # 1. the user is singed in and the service already exits, we just update access token
-    # 2. user is signed in and they dont have this service, so we connect
-    # 3. user is logged out and they dont have an account at all
-    # 4. user is logged out and they have an account alredy that matches, look up service and then log them in
-    # 5. user is logged out and they log in to a new account that doesnt match their old one, we throw exception to let them know
+    handle_auth "Twitter"
   end
 
 private
 
+# 1. the user is singed in and the service already exits, we just update access token
+# 2. user is signed in and they dont have this service, so we connect
+# 3. user is logged out and they dont have an account at all
+# 4. user is logged out and they have an account alredy that matches, look up service and then log them in
+
   def auth
     request.env['omniauth.auth'] # can print to console to see the result
+  end
+
+  def handle_auth(kind)
+
+    if service.present? #if the service exists
+      service.update(service_attributes) # update the credentials to the newest ones on every log in
+    else
+      # create the service associated with the user from the oauth hash, we pull the data from the oauth response hash that we printed to the console
+      user.services.create(service_attributes)
+    end
+
+    if user_signed_in?
+      flash[:notice] = "Your #{kind} is now Connected"
+      redirect_to edit_user_registration_path
+    else
+      sign_in_and_redirect user, event: :authentication
+      set_flash_message :notice, :success, kind: kind
+    end
   end
 
   def set_service
@@ -57,24 +53,42 @@ private
 
     if user_signed_in?
       @user = current_user
-
     elsif service.present?
       @user = service.user
-
-    else
-
-      if User.where(email: auth.info.email).any?
+    elsif User.where(email: auth.info.email).any?
+      # 5. user is logged out and they log in to a new account that doesnt match their old one, we throw exception to let them know
         flash[:alert] = "An Account already exists, pelase connect with #{auth.provider.titalize} accout"
         redirect_to new_user_session_path
-      end
-
-      # if doesnt exist, create the user
-      user = User.create(
-        email: auth.info.email,
-        name: auth.info.name,
-        password: Devise.friendly_token[0,20]
-      )
+    else
+      # if doesnt exist, create the user,
+      @user = create_user
     end
-
   end
+
+  def service_attributes
+    expires_at = auth.credentials.expires_at.present? ? Time.at(auth.credentials.expires_at) : nil
+    {
+      provider: auth.provider,
+      uid: auth.uid,
+      access_token: auth.credentials.access_token,
+      expires_at: expires_at, #convert expiration date to a timestamp
+      auth: auth #save the hash for future consideration
+    }
+  end
+
+  # def update_attributes
+  #   {
+  #     expires_at: Time.at(auth.credentials.expires_at),
+  #     access_token: auth.credentials.token
+  #   }
+  # end
+
+  def create_user
+    User.create(
+      email: auth.info.email,
+      name: auth.info.name,
+      password: Devise.friendly_token[0,20]
+    )
+  end
+
 end
