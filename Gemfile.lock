@@ -204,6 +204,7 @@ GEM
     notiffany (0.1.1)
       nenv (~> 0.1)
       shellany (~> 0.0)
+    oauth (0.5.3)
     oauth2 (1.4.0)
       faraday (>= 0.8, < 0.13)
       jwt (~> 1.0)
@@ -215,9 +216,15 @@ GEM
       rack (>= 1.6.2, < 3)
     omniauth-facebook (4.0.0)
       omniauth-oauth2 (~> 1.2)
+    omniauth-oauth (1.1.0)
+      oauth
+      omniauth (~> 1.0)
     omniauth-oauth2 (1.4.0)
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
+    omniauth-twitter (1.4.0)
+      omniauth-oauth (~> 1.1)
+      rack
     orm_adapter (0.5.0)
     pg (0.21.0)
     pry (0.11.3)
@@ -379,6 +386,7 @@ DEPENDENCIES
   mini_magick (~> 4.8)
   mini_racer
   omniauth-facebook
+  omniauth-twitter
   pg (~> 0.18)
   pry-rails (~> 0.3.6)
   puma (~> 3.7)
