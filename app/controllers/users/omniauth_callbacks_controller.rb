@@ -70,7 +70,8 @@ private
     {
       provider: auth.provider,
       uid: auth.uid,
-      access_token: auth.credentials.access_token,
+      access_token: auth.credentials.token,
+      access_token_secret: auth.credentials.secret
       expires_at: expires_at, #convert expiration date to a timestamp
       auth: auth #save the hash for future consideration
     }
