@@ -6,9 +6,7 @@
   z-index: 1;
 
   .topColor {
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     background-color: #ab47bc;
-
     height: 50vh;
   }
 
@@ -29,13 +27,14 @@
   position: absolute;
   top: 20vh;
   margin: 0 auto;
-  padding-top: 100px;
+  padding-top: 50px;
   width: 40vw;
   left: 30vw;
   background-color: #fff;
   border: 3px solid #000;
   min-height: 60vh;
   text-align: center;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 
   h2 {
     margin-bottom: 50px;

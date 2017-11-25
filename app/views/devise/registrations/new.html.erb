@@ -12,14 +12,7 @@
 
     <%= f.text_field :name, autofocus: true, placeholder: 'NAME', class: "field" %>
     <%= f.email_field :email, autofocus: true, placeholder: 'EMAIL', class: "field" %>
-
-    <%= f.label :password, placeholder: 'PASSWORD', class: "field" %>
-    
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-
+    <%= f.password_field :password, autocomplete: "off", placeholder: "PASSWORD (#{@minimum_password_length} characters minimum)", class: "field" %>
     <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: 'PASSWORD CONFIRMATION', class: "field" %>
 
     <div class="actions">
