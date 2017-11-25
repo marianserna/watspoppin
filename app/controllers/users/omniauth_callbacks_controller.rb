@@ -3,24 +3,24 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   before_action :set_service
   before_action :set_user
 
-  attr_reader :service
+  attr_reader :service, :user
 
-  #look up existing user with a provider account or we create a new user with this account
+  # 1. the user is singed in and the service already exits, we just update access token
+  # 2. user is signed in and they dont have this service, so we connect
+  # 3. user is logged out and they dont have an account at all
+  # 4. user is logged out and they have an account alredy that matches, look up service and then log them in
 
   def facebook
-    handle_auth "Facebook"
+    handle_auth "facebook"
   end
 
   def twitter
-    handle_auth "Twitter"
+    handle_auth "twitter"
   end
 
 private
 
-# 1. the user is singed in and the service already exits, we just update access token
-# 2. user is signed in and they dont have this service, so we connect
-# 3. user is logged out and they dont have an account at all
-# 4. user is logged out and they have an account alredy that matches, look up service and then log them in
+
 
   def auth
     request.env['omniauth.auth'] # can print to console to see the result
