@@ -7,7 +7,9 @@ export default class UserCard extends React.Component {
   };
 
   render() {
-    if (!this.props.user) {
+    const { user } = this.props;
+
+    if (!user) {
       return (
         <figure>
           <img src="/mario.jpg" alt="super mario" />
@@ -15,13 +17,12 @@ export default class UserCard extends React.Component {
         </figure>
       );
     }
+    const image_url = user.image.thumb.url;
+
     return (
       <figure>
-        <img
-          src="https://assets.vogue.com/photos/5891c8b097a3db337a24c8f7/master/pass/llamas-and-haircuts-prince-harry1.jpg"
-          alt={this.props.user.name}
-        />
-        <figcaption>You are here</figcaption>
+        <img src={image_url || '/mario.jpg'} alt={user.name} />
+        <figcaption>{user.name}</figcaption>
       </figure>
     );
   }
