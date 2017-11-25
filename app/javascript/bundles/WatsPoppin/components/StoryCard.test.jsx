@@ -12,7 +12,7 @@ const story = {
 };
 
 it('Renders a figure for the story clicked', () => {
-  const storyCard = render(<StoryCard story={story} />);
+  const wrapper = render(<StoryCard story={story} />);
 
-  expect(storyCard).toMatchSnapshot();
+  expect(wrapper).toMatchSnapshot();
 });

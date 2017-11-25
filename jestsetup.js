@@ -17,5 +17,6 @@ global.mount = mount;
 
 // Fail tests on any warning
 console.error = message => {
+  console.log(message);
   throw new Error(message);
 };

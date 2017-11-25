@@ -9,14 +9,14 @@ it('renders user card when user is present', () => {
     name: 'Maria Antonieta de las Nieves'
   };
 
-  const userCard = render(<UserCard user={user} />);
-  expect(userCard).toMatchSnapshot();
+  const wrapper = render(<UserCard user={user} />);
+  expect(wrapper).toMatchSnapshot();
 });
 
 // Test when there's no user
 it('renders user card when user is null', () => {
   const user = null;
 
-  const userCard = render(<UserCard user={user} />);
-  expect(userCard).toMatchSnapshot();
+  const wrapper = render(<UserCard user={user} />);
+  expect(wrapper).toMatchSnapshot();
 });
