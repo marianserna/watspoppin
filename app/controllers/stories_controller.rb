@@ -5,12 +5,13 @@ class StoriesController < ApplicationController
   end
 
   def create
-    @story = Story.new
-    @story.content = params[:story][:content]
-    @story.image = params[:story][:image]
-    @story.latitude = params[:story][:latitude]
-    @story.longitude = params[:story][:longitude]
-    @story.user_id = current_user.id
+    Story.create(params[:story])
+    # @story = Story.new
+    # @story.content = params[:story][:content]
+    # @story.image = params[:story][:image]
+    # @story.latitude = params[:story][:latitude]
+    # @story.longitude = params[:story][:longitude]
+    # @story.user_id = current_user.id
     @story.source = "watspoppin"
 
     if @story.save
@@ -46,7 +47,28 @@ class StoriesController < ApplicationController
     end
 
     render json: @stories
+  end
 
+# Twitter Post Methods
+  def twitter
+    client = Twitter::REST::Client.new(twitter_config)
+  end
+
+  def twitter_config
+    config = {
+    consumer_key:    "YOUR_CONSUMER_KEY",
+    consumer_secret: "YOUR_CONSUMER_SECRET",
+    }
+  end
+
+  def post_to_twitter
+    #code
+  end
+
+  private
+
+  def story_params
+    params.require(:story).permit(:content, :image, :latitude, :longitude, :user_id)
   end
 
 end
