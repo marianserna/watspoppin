@@ -37,33 +37,4 @@ class Story < ApplicationRecord
     story.save!
     story
   end
-
-
-  def self.save_instagram(post)
-    return if !post.location
-    return if Story.find_by(uid: post.id)
-    return if post.type != 'image'
-
-    story = Story.new({
-      content: post.caption,
-      source: 'Instagram',
-      uid: post.id,
-      handle: post.user.username,
-      longitude: post.location.longitude,
-      latitude: post.location.latitude
-    })
-
-
-    story.remote_image_url = post.images.standard_resolution.url
-
-    hashtags = post.tags.map do |insta_tag|
-      Hashtag.find_or_create_by!({
-        name: insta_tag.downcase
-      })
-    end
-
-    story.hashtags = hashtags
-    story.save!
-    story
-  end
 end
