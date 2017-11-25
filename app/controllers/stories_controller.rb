@@ -10,7 +10,7 @@ class StoriesController < ApplicationController
     @story.image = params[:story][:image]
     @story.latitude = params[:story][:latitude]
     @story.longitude = params[:story][:longitude]
-    #@story.user_id = current_user.id
+    @story.user_id = current_user.id
     @story.source = "watspoppin"
 
     if @story.save
