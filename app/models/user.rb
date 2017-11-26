@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  mount_uploader :image, AvatarUploader
+
   has_many :stories
   has_many :services, dependent: :destroy
   # Include default devise modules. Others available are:

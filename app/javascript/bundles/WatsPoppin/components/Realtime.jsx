@@ -58,7 +58,11 @@ export default class Realtime extends React.Component {
             <ul>
               {this.props.trending_hashtags.map(trend => (
                 <li key={trend}>
-                  <a href="#" onClick={e => this.triggerSearch(e, trend)}>
+                  <a
+                    className="trend_link"
+                    href="#"
+                    onClick={e => this.triggerSearch(e, trend)}
+                  >
                     {trend}
                   </a>
                 </li>

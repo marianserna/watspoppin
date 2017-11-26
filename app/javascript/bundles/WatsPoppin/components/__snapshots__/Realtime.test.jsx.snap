@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Realtime Renders correctly 1`] = `
+<div>
+  <div
+    class="stories"
+  >
+    <div
+      class="realtime_story"
+    >
+      <img
+        alt="Locavore mumblecore XOXO seitan, jean shorts williamsburg flannel pickled"
+        class="user_img"
+        src="/mario.jpg"
+      />
+      <p
+        class="handle"
+      >
+        Gorvachov puff puff
+      </p>
+      <p>
+        Locavore mumblecore XOXO seitan, jean shorts williamsburg flannel pickled...
+      </p>
+    </div>
+  </div>
+  <div
+    class="trends collapsed"
+  >
+    <p>
+      TRENDING
+    </p>
+    <section
+      class="trending_hashtags"
+    >
+      <ul>
+        <li>
+          <a
+            class="trend_link"
+            href="#"
+          >
+            dog
+          </a>
+        </li>
+        <li>
+          <a
+            class="trend_link"
+            href="#"
+          >
+            cat
+          </a>
+        </li>
+        <li>
+          <a
+            class="trend_link"
+            href="#"
+          >
+            bunny
+          </a>
+        </li>
+      </ul>
+    </section>
+  </div>
+</div>
+`;

@@ -13,7 +13,8 @@ export default class Home extends React.Component {
     latitude: PropTypes.number.isRequired,
     longitude: PropTypes.number.isRequired,
     stories: PropTypes.array.isRequired,
-    trending_hashtags: PropTypes.array.isRequired
+    trending_hashtags: PropTypes.array.isRequired,
+    user: PropTypes.object
   };
 
   /**
@@ -130,6 +131,7 @@ export default class Home extends React.Component {
             updateCurrentPosition={this.updateCurrentPosition}
             updateViewport={this.updateViewport}
             stories={this.state.stories}
+            user={this.props.user}
           />
         </section>
 

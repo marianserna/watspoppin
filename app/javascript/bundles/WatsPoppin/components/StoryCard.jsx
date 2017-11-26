@@ -15,7 +15,7 @@ export default class StoryCard extends React.Component {
         <img
           className={image_url ? 'user_img' : 'default_img'}
           src={image_url ? image_url : '/twitter-logo.svg'}
-          alt={story.id}
+          alt={story.content}
         />
         <figcaption>{story.content}</figcaption>
       </figure>

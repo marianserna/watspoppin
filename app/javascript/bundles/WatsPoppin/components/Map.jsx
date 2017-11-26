@@ -12,7 +12,8 @@ class Map extends React.Component {
     currentPosition: PropTypes.object.isRequired,
     viewport: PropTypes.object.isRequired,
     stories: PropTypes.array.isRequired,
-    updateViewport: PropTypes.func.isRequired
+    updateViewport: PropTypes.func.isRequired,
+    user: PropTypes.object
   };
 
   constructor(props) {
@@ -77,7 +78,7 @@ class Map extends React.Component {
           latitude={currentPosition.latitude}
           onClose={() => this.setState({ popupStatus: null })}
         >
-          <UserCard />
+          <UserCard user={this.props.user} />
         </Popup>
       );
     } else if (popupStatus === 'story') {

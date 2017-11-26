@@ -6,9 +6,7 @@ class Story < ApplicationRecord
   belongs_to :user, optional: true
 
   def self.save_tweet(tweet)
-    p tweet
-
-    return if !tweet.is_a?(Twitter::Tweet)
+    return if !tweet.respond_to?(:retweeted_status?)
     return if tweet.retweeted_status?
     return if !tweet.geo?
     return if Story.find_by(uid: tweet.id)
@@ -33,35 +31,6 @@ class Story < ApplicationRecord
     end
 
     # a story has & belongs to many hashtags: Save story hashtags
-    story.hashtags = hashtags
-    story.save!
-    story
-  end
-
-
-  def self.save_instagram(post)
-    return if !post.location
-    return if Story.find_by(uid: post.id)
-    return if post.type != 'image'
-
-    story = Story.new({
-      content: post.caption,
-      source: 'Instagram',
-      uid: post.id,
-      handle: post.user.username,
-      longitude: post.location.longitude,
-      latitude: post.location.latitude
-    })
-
-
-    story.remote_image_url = post.images.standard_resolution.url
-
-    hashtags = post.tags.map do |insta_tag|
-      Hashtag.find_or_create_by!({
-        name: insta_tag.downcase
-      })
-    end
-
     story.hashtags = hashtags
     story.save!
     story
