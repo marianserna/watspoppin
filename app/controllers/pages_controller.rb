@@ -11,7 +11,7 @@ class PagesController < ApplicationController
     @props = {
       latitude: latitude,
       longitude: longitude,
-      stories: Story.near([latitude, longitude]).last(100),
+      stories: Story.near([latitude, longitude]).reorder(id: :desc).limit(100),
       trending_hashtags: twitter_trends.trends,
       user: current_user
     }
