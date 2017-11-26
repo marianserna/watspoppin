@@ -20,8 +20,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
 private
 
-
-
   def auth
     request.env['omniauth.auth'] # can print to console to see the result
   end
