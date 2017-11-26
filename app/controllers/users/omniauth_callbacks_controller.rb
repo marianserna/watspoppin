@@ -27,7 +27,7 @@ private
   end
 
   def handle_auth(kind)
-
+    # raise :test
     if service.present? #if the service exists
       service.update(service_attributes) # update the credentials to the newest ones on every log in
     else
@@ -71,7 +71,7 @@ private
       provider: auth.provider,
       uid: auth.uid,
       access_token: auth.credentials.token,
-      access_token_secret: auth.credentials.secret
+      access_token_secret: auth.credentials.secret,
       expires_at: expires_at, #convert expiration date to a timestamp
       auth: auth #save the hash for future consideration
     }

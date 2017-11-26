@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_many :stories
-  has_many :services
+  has_many :services, dependent: :destroy
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and
   devise :database_authenticatable, :registerable,
@@ -18,5 +18,5 @@ class User < ApplicationRecord
      access_token_secret:  "TWITTER_API_ACCESS_TOKEN_SECRET"
      }
    end
-   
+
 end

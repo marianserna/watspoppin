@@ -5,7 +5,7 @@ class StoriesController < ApplicationController
   end
 
   def create
-    @story = Story.new(story_params)
+    @story = Story.create(story_params)
     # @story.source = "watspoppin"
 
     if @story.save
