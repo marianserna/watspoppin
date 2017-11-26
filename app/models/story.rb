@@ -35,4 +35,8 @@ class Story < ApplicationRecord
     story.save!
     story
   end
+
+  def self.remove_old_tweets
+    Story.where(source: "Twitter").where("created_at < ?", 24.hours.ago).delete_all
+  end
 end
