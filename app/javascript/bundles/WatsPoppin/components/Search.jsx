@@ -29,7 +29,7 @@ export default class Search extends React.Component {
   render() {
     return (
       <div>
-        <form onSubmit={e => this.handleSubmit(e)}>
+        <form className="search" onSubmit={e => this.handleSubmit(e)}>
           <input
             type="text"
             className="hashtag"

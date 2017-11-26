@@ -1,4 +1,7 @@
-button {
+button,
+[type='button'],
+[type='reset'],
+[type='submit'] {
   font-family: $button_font;
   font-size: $button_font_size;
   color: $button_text_color;
