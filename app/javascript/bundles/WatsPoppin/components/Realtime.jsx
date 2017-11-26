@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Linkify from 'react-linkify';
+
 export default class Realtime extends React.Component {
   static propTypes = {
     stories: PropTypes.array.isRequired,
@@ -38,7 +40,9 @@ export default class Realtime extends React.Component {
                 alt={story.content}
               />
               <p className="handle">{story.handle}</p>
-              <p>{story.content.substring(0, 600)}...</p>
+              <Linkify>
+                <p>{story.content.substring(0, 600)}...</p>
+              </Linkify>
             </div>
           ))}
         </div>

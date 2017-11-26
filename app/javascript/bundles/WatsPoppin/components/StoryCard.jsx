@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Linkify from 'react-linkify';
+
 export default class StoryCard extends React.Component {
   static propTypes = {
     story: PropTypes.object.isRequired
@@ -17,7 +19,9 @@ export default class StoryCard extends React.Component {
           src={image_url ? image_url : '/twitter-logo.svg'}
           alt={story.content}
         />
-        <figcaption>{story.content}</figcaption>
+        <Linkify>
+          <figcaption>{story.content}</figcaption>
+        </Linkify>
       </figure>
     );
   }
