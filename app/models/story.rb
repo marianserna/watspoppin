@@ -6,9 +6,7 @@ class Story < ApplicationRecord
   belongs_to :user, optional: true
 
   def self.save_tweet(tweet)
-    p tweet
-
-    return if !tweet.is_a?(Twitter::Tweet)
+    return if !tweet.respond_to?(:retweeted_status?)
     return if tweet.retweeted_status?
     return if !tweet.geo?
     return if Story.find_by(uid: tweet.id)
