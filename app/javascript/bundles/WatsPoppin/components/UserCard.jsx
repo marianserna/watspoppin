@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Linkify from 'react-linkify';
+
 export default class UserCard extends React.Component {
   static propTypes = {
     user: PropTypes.object
@@ -22,7 +24,9 @@ export default class UserCard extends React.Component {
     return (
       <figure>
         <img src={image_url || '/mario.jpg'} alt={user.name} />
-        <figcaption>{user.name}</figcaption>
+        <Linkify>
+          <figcaption>{user.name}</figcaption>
+        </Linkify>
       </figure>
     );
   }
