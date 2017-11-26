@@ -32,4 +32,16 @@ RSpec.describe Story, type: :model do
       expect(Story.count).to eq(1)
     end
   end
+
+
+  describe '#remove_old_tweets' do
+    it 'deletes tweets older than 24 hours' do
+      story = create(:story)
+      story.created_at = 48.hours.ago
+      story.save!
+
+      Story.remove_old_tweets
+      expect(Story.count).to eq(0)
+    end
+  end
 end
