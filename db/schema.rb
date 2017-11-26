@@ -50,9 +50,9 @@ ActiveRecord::Schema.define(version: 20171125202431) do
     t.float "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
     t.string "uid"
     t.string "handle"
-    t.integer "user_id"
     t.index ["uid"], name: "index_stories_on_uid"
   end
 
