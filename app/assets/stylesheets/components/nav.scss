@@ -12,11 +12,7 @@ nav {
   color: $button_text_color;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   background: #4568dc; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #b06ab3,
-    #4568dc
-  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right, #b06ab3, #4568dc); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(
     to right,
     #b06ab3,
@@ -27,12 +23,14 @@ nav {
     width: 25%;
     height: 100%;
     border-right: 3px solid $button_text_color;
+    transition: background-color 1s ease;
   }
 
   .middle-nav {
     width: 25%;
     height: 100%;
     border-right: 3px solid $button_text_color;
+    transition: background-color 1s ease;
   }
 
   .home-icon,
@@ -42,6 +40,11 @@ nav {
     display: block;
     margin: 0 auto;
     margin-top: 5px;
+  }
+
+  .left-nav:hover,
+  .middle-nav:hover {
+    background-color: #000;
   }
 
   .icon-text {
