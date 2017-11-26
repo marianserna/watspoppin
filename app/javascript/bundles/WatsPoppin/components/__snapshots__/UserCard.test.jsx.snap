@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders user card when user is null 1`] = `
+<figure>
+  <img
+    alt="super mario"
+    src="/mario.jpg"
+  />
+  <figcaption>
+    You're here!!
+  </figcaption>
+</figure>
+`;
+
+exports[`renders user card when user is present 1`] = `
+<figure>
+  <img
+    alt="Maria Antonieta de las Nieves"
+    src="/luigi.jpg"
+  />
+  <figcaption>
+    Maria Antonieta de las Nieves
+  </figcaption>
+</figure>
+`;

@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :hashtag do
-    name "MyString"
+    name "cat"
   end
 end

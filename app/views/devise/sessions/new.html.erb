@@ -1,0 +1,28 @@
+<div className="form_outer">
+  <div class="form_background">
+    <div class="topColor"></div>
+    <div class="bottomColor"></div>
+  </div>
+
+  <section class="login_form">
+    <h2>LOGIN</h2>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), class: "login") do |f| %>
+      <%= f.email_field :email, placeholder: 'EMAIL', class: "field", autofocus: true %>
+      <%= f.password_field :password, placeholder: 'PASSWORD', class: "field", autocomplete: "off" %>
+
+      <% if devise_mapping.rememberable? -%>
+        <div class="field">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        </div>
+      <% end -%>
+
+      <div class="actions">
+        <%= f.submit "Log in" %>
+      </div>
+    <% end %>
+  </section>
+
+  <%= render "devise/shared/links" %>
+
+</div>
