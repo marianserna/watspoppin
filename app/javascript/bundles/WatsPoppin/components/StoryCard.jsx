@@ -3,20 +3,27 @@ import PropTypes from 'prop-types';
 
 import Linkify from 'react-linkify';
 
-export default class StoryCard extends React.Component {
+export default class StoryCard extends React.PureComponent {
   static propTypes = {
-    story: PropTypes.object.isRequired
+    story: PropTypes.shape({
+      content: PropTypes.string,
+      image: PropTypes.shape({
+        thumb: PropTypes.shape({
+          url: PropTypes.string
+        })
+      })
+    }).isRequired
   };
 
   render() {
     const { story } = this.props;
-    const image_url = story.image.thumb.url;
+    const imageUrl = story.image.thumb.url;
 
     return (
       <figure>
         <img
-          className={image_url ? 'user_img' : 'default_img'}
-          src={image_url ? image_url : '/twitter-logo.svg'}
+          className={imageUrl ? 'user_img' : 'default_img'}
+          src={imageUrl || '/twitter-logo.svg'}
           alt={story.content}
         />
         <Linkify>
