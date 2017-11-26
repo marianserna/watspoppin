@@ -48,8 +48,25 @@
   background-color: #ab47bc;
   position: relative;
 
-  form {
-    margin-bottom: 50px;
+  // form {
+  //   margin-bottom: 50px;
+  // }
+
+  .voice_search {
+    height: 60px;
+    text-align: center;
+    background-color: #fff;
+    border-bottom: 3px solid #000;
+    margin-bottom: 30px;
+    color: $highlight_text_color;
+    // font-size: $card_font_size;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    strong {
+      color: #ab47bc;
+    }
   }
 
   &.map_expanded {

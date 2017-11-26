@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import axios from 'axios';
+import Annyang from 'annyang';
 
 import Map from '../components/Map';
 import Search from '../components/Search';
@@ -51,6 +52,23 @@ export default class Home extends React.Component {
       this.state.currentPosition.latitude,
       this.state.currentPosition.longitude
     );
+
+    Annyang.addCommands({
+      'search (for) :hashtag in *location': (hashtag, location) => {
+        console.log(hashtag, location);
+
+        const geo = new window.google.maps.Geocoder();
+        geo.geocode({ address: location }, (results, status) => {
+          if (status === window.google.maps.GeocoderStatus.OK) {
+            const first_result = results[0];
+            const result_location = first_result.geometry.location;
+
+            this.search(hashtag, result_location.lat(), result_location.lng());
+          }
+        });
+      }
+    });
+    Annyang.start();
   }
 
   updateCurrentPosition = (lat, lng) => {
@@ -145,6 +163,12 @@ export default class Home extends React.Component {
             search={this.search}
             currentPosition={this.state.currentPosition}
           />
+          <p className="voice_search">
+            <span>
+              For voice search pronounce "Search <strong>HASHTAG</strong> in{' '}
+              <strong>LOCATION</strong>"
+            </span>
+          </p>
 
           <Realtime
             className="realtime"
