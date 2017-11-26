@@ -64,6 +64,13 @@ export default class Home extends React.Component {
             const result_location = first_result.geometry.location;
 
             this.search(hashtag, result_location.lat(), result_location.lng());
+
+            if (window.speechSynthesis) {
+              const talk = new SpeechSynthesisUtterance(
+                `Searching for ${hashtag} in ${location}`
+              );
+              window.speechSynthesis.speak(talk);
+            }
           }
         });
       }
