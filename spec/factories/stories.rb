@@ -1,10 +1,9 @@
 FactoryBot.define do
   factory :story do
-    user_id "MyString"
-    content "MyText"
-    source "MyString"
-    image "MyString"
-    lattitude 1.5
-    longitude 1.5
+    user_id nil
+    content "Soy un tweet"
+    source "Twitter"
+    latitude 43.6532
+    longitude -79.3832
   end
 end
