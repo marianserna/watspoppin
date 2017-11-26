@@ -1,7 +1,8 @@
 class StoriesController < ApplicationController
+  before_action :require_login , only: [:new, :create]
 
   def new
-    @story = Story.new
+      @story = Story.new
   end
 
   def create
@@ -48,6 +49,15 @@ class StoriesController < ApplicationController
   def story_params
     params.require(:story).permit(:content, :image, :latitude, :longitude, :user_id)
   end
+
+  def require_login
+    if !user_signed_in?
+      flash.notice = "Please log-in to create a story"
+      redirect_to root_path
+    end
+  end
+
+
 end
 # old Code that was refactored
 # @story = Story.new
