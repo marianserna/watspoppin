@@ -41,17 +41,20 @@
     color: #0080ff;
   }
 
-  .login {
+  .login,
+  #new_story {
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
+    margin: 0 auto;
+    width: 80%;
 
     .field {
       width: 100%;
     }
   }
 
-  input[class='field'] {
+  input[class='field'],
+  textarea[class='field'] {
     border: 3px solid #000;
     width: 70%;
     height: 60px;
@@ -85,5 +88,10 @@
     background-color: #fff;
     height: 60px;
     background-color: #8c95aa;
+  }
+
+  .actions {
+    display: block;
+    width: 100%;
   }
 }

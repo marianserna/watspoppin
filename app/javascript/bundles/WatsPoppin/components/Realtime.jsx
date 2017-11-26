@@ -5,8 +5,8 @@ import Linkify from 'react-linkify';
 
 export default class Realtime extends React.Component {
   static propTypes = {
-    stories: PropTypes.array.isRequired,
-    trending_hashtags: PropTypes.array.isRequired,
+    stories: PropTypes.arrayOf(PropTypes.object).isRequired,
+    trending_hashtags: PropTypes.arrayOf(PropTypes.string).isRequired,
     search: PropTypes.func.isRequired
   };
 
@@ -32,11 +32,7 @@ export default class Realtime extends React.Component {
             <div key={story.id} className="realtime_story">
               <img
                 className={story.image.thumb.url ? 'user_img' : 'default_img'}
-                src={
-                  story.image.thumb.url
-                    ? story.image.thumb.url
-                    : '/twitter-logo.svg'
-                }
+                src={story.image.thumb.url ? story.image.thumb.url : '/twitter-logo.svg'}
                 alt={story.content}
               />
               <p className="handle">{story.handle}</p>
@@ -49,7 +45,7 @@ export default class Realtime extends React.Component {
 
         <div
           className={`trends ${this.state.collapsed ? 'collapsed' : ''}`}
-          onClick={e => {
+          onClick={(e) => {
             e.preventDefault();
             this.setState({
               collapsed: !this.state.collapsed
@@ -62,11 +58,7 @@ export default class Realtime extends React.Component {
             <ul>
               {this.props.trending_hashtags.map(trend => (
                 <li key={trend}>
-                  <a
-                    className="trend_link"
-                    href="#"
-                    onClick={e => this.triggerSearch(e, trend)}
-                  >
+                  <a className="trend_link" href="#" onClick={e => this.triggerSearch(e, trend)}>
                     {trend}
                   </a>
                 </li>
