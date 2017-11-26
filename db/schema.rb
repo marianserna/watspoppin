@@ -43,7 +43,6 @@ ActiveRecord::Schema.define(version: 20171125202431) do
   end
 
   create_table "stories", force: :cascade do |t|
-    t.string "user_id"
     t.text "content"
     t.string "source"
     t.string "image"
@@ -51,6 +50,7 @@ ActiveRecord::Schema.define(version: 20171125202431) do
     t.float "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
     t.string "uid"
     t.string "handle"
     t.index ["uid"], name: "index_stories_on_uid"
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 20171125202431) do
     t.string "image"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
   end
 
   add_foreign_key "services", "users"

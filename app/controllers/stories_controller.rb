@@ -5,12 +5,8 @@ class StoriesController < ApplicationController
   end
 
   def create
-    @story = Story.new
-    @story.content = params[:story][:content]
-    @story.image = params[:story][:image]
-    # @story.source =
-    # @story.latitude =
-    # @story.longitude =
+    @story = Story.create(story_params)
+    # @story.source = "watspoppin"
 
     if @story.save
       flash.notice = 'Story created'
@@ -19,6 +15,7 @@ class StoriesController < ApplicationController
       flash.alert = 'Story could not be created. Please correct and try again.'
       render 'new'
     end
+
   end
 
   def search
@@ -40,4 +37,22 @@ class StoriesController < ApplicationController
     render json: @stories
   end
 
+# Twitter Post Methods
+
+  def post_to_twitter
+    #code
+  end
+
+  private
+
+  def story_params
+    params.require(:story).permit(:content, :image, :latitude, :longitude, :user_id)
+  end
 end
+# old Code that was refactored
+# @story = Story.new
+# @story.content = params[:story][:content]
+# @story.image = params[:story][:image]
+# @story.latitude = params[:story][:latitude]
+# @story.longitude = params[:story][:longitude]
+# @story.user_id = current_user.id

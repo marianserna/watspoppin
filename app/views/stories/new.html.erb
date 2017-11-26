@@ -3,8 +3,21 @@
 <%= form_for @story do |f| %>
 
   <p>
+    <label for="">Enter address to geotag story: </label>
+    <input id="address" type="text" placeholder="Search Box" style="width:400px;">
+  </p>
+
+  <p>
     <%= f.label :image %>
     <%= f.text_field :image %>
+  </p>
+
+  <p>
+    <%= f.hidden_field :latitude , id: 'lat'%>
+  </p>
+
+  <p>
+    <%= f.hidden_field :longitude , id: 'lon'%>
   </p>
 
   <p>
@@ -18,3 +31,32 @@
 
 
 <% end %>
+
+<script>
+
+//select address field
+const autocompleteFormField = document.getElementById(`address`);
+
+//
+const autocomplete = new google.maps.places.Autocomplete((autocompleteFormField), {
+  types: [`address`]
+  //componentRestrictions: [`us`]
+});
+
+//get selected place from the autocomplete list and insert them in the form
+autocomplete.addListener('place_changed', function() {
+
+  //get selected location
+  var place = autocomplete.getPlace();
+
+  //extract geotags from location
+  var latitude = place.geometry.location.lat();
+  var longitude = place.geometry.location.lng();
+
+  //insert latitude and longitude to form input fields
+  document.querySelector('#lat').value = latitude;
+  document.querySelector('#lon').value = longitude;
+
+});
+
+</script>

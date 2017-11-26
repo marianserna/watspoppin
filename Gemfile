@@ -75,6 +75,7 @@ gem 'devise'
 
 # Omniauth rubygems
 gem 'omniauth-facebook'
+gem 'omniauth-twitter'
 
 # Facebook Koala
 gem 'koala'
