@@ -9,15 +9,18 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
    def twitter
-     client = Twitter::REST::Client.new(twitter_config)
-   end
-
+     if self.services.where(provider: "twitter").any?
+       return @client ||= Twitter::REST::Client.new(twitter_config)
+     else
+       return false
+     end
+  end
    def twitter_config
      config = {
-     consumer_key:         "TWITTER_CONSUMER_KEY",
-     consumer_secret:      "TWITTER_CONSUMER_SECRET",
-     access_token:         "TWITTER_API_ACCESS_TOKEN",
-     access_token_secret:  "TWITTER_API_ACCESS_TOKEN_SECRET"
+     consumer_key:         ENV["TWITTER_CONSUMER_KEY"],
+     consumer_secret:      ENV["TWITTER_CONSUMER_SECRET"],
+     access_token:         self.services.where(provider: "twitter").first.access_token,
+     access_token_secret:  self.services.where(provider: "twitter").first.access_token_secret
      }
    end
 

@@ -7,7 +7,7 @@ class StoriesController < ApplicationController
 
   def create
     @story = Story.create(story_params)
-    # @story.source = "watspoppin"
+    @story.source = "watspoppin"
 
     if @story.save
       flash.notice = 'Story created'
@@ -47,7 +47,7 @@ class StoriesController < ApplicationController
   private
 
   def story_params
-    params.require(:story).permit(:content, :image, :latitude, :longitude, :user_id)
+    params.require(:story).permit(:content, :image, :latitude, :longitude, :user_id, :soruce)
   end
 
   def require_login
