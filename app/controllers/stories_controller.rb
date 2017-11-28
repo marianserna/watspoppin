@@ -12,9 +12,9 @@ class StoriesController < ApplicationController
 
     if @story.save
       flash.notice = 'Story created'
-
-      @story.post_to_twitter if params[:twitter]
-      @story.post_to_facebook if params[:facebook]
+      # raise :test
+      @story.post_to_twitter if params[:story][:twitter] == "1"
+      @story.post_to_facebook if params[:story][:facebook] == "1"
 
       redirect_to root_path
     else
