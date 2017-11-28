@@ -8,9 +8,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
-   def twitter(tweet)
-     @client ||= Twitter::REST::Client.new(twitter_config)
-     @client.update(tweet)
+# Twitter User methods
+  def twitter(tweet)
+   @client ||= Twitter::REST::Client.new(twitter_config)
+   @client.update(tweet)
   end
 
  def twitter_config
@@ -21,5 +22,15 @@ class User < ApplicationRecord
    access_token_secret:  self.services.where(provider: "twitter").first.access_token_secret
    }
  end
+
+# Facebook Access Methods
+ def facebook(wall_post)
+   @graph ||= self.services.where(provider: "facebook").first.facebook_client # call the facebook_client method in service model that refreshes our access token every time.
+   raise :test
+   # @graph.put_connections("me", "feed", message: wall_post)
+   @graph.put_wall_post(wall_post)
+ end
+
+
 
 end
