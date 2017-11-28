@@ -48,5 +48,11 @@ class Story < ApplicationRecord
     end
   end
 
+  # Facebook Post Methods
+  def post_to_facebook
+    if user && user.services.where(provider: "facebook").any?
+      user.facebook(self.conent)
+  end
+
 
 end
