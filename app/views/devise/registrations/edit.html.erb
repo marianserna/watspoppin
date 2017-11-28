@@ -28,22 +28,22 @@
 
       <div class="social-media">
         <div class="media field">
+          <%= image_tag '/twitter.svg', class: 'twitter' %>
           <% if current_user.services.twitter.any? %>
             Connected
           <% else %>
             <a href="<%= user_twitter_omniauth_authorize_path %>" class="media-container">
-              <%= image_tag '/twitter.svg', class: 'twitter' %>
               <span class="link-media">Link your Twitter</span>
             </a>
           <% end %>
         </div>
 
         <div class="media field">
+          <%= image_tag '/facebook.svg', class: 'facebook' %>
           <% if current_user.services.facebook.any? %>
             Connected
           <% else %>
             <a href="<%= user_facebook_omniauth_authorize_path %>" class="media-container">
-              <%= image_tag '/facebook.svg', class: 'facebook' %>
               <span class="link-media">Link your Facebook</span>
             </a>
           <% end %>
