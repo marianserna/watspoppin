@@ -2,10 +2,10 @@ class Story < ApplicationRecord
   mount_uploader :image, StoryImageUploader
   reverse_geocoded_by :latitude, :longitude
 
+  after_create :insert_hashtags
+
   has_and_belongs_to_many :hashtags
   belongs_to :user, optional: true
-
-  after_create :post_to_twitter , :insert_hashtags,  :post_to_facebook
 
   def self.save_tweet(tweet)
     return if !tweet.respond_to?(:retweeted_status?)

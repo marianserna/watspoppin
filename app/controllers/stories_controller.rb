@@ -12,6 +12,10 @@ class StoriesController < ApplicationController
 
     if @story.save
       flash.notice = 'Story created'
+
+      @story.post_to_twitter if params[:twitter]
+      @story.post_to_facebook if params[:facebook]
+
       redirect_to root_path
     else
       flash.alert = 'Story could not be created. Please correct and try again.'
