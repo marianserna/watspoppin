@@ -23,6 +23,20 @@ class StoriesController < ApplicationController
         hashtag = hashtag.slice!(0)
       end
 
+      #check whether each hashtag is in the hashtags table
+      #if it is then create record in join table
+      #if not then create new record in hastags table and insert record in join table
+      hashtags.each do |hashtag|
+        hashtag_obj = Hashtag.find_by(name: hashtag)
+          if hashtag_obj
+            @story.hashtags << hashtag_obj
+          else
+            hashtag_obj = Hashtag.new
+            hashtag_obj.name = hashtag
+            @story.hashtags << hashtag_obj
+          end
+      end
+
       flash.notice = 'Story created'
       redirect_to root_path
     else
