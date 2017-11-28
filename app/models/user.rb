@@ -25,13 +25,16 @@ class User < ApplicationRecord
 
 # Facebook Access Methods
  def facebook(wall_post)
-   @user ||= Koala::Facebook::API.new(facebook_access_token)
+   # Koala.configure(koala_config)
+   @graph ||= Koala::Facebook::API.new(facebook_access_token)
    raise :test
-   @user.put_connections("me", "feed", message: wall_post)
+   # @graph.put_connections("me", "feed", message: wall_post)
+   @graph.put_wall_post(wall_post)
  end
 
  def facebook_access_token
    self.services.where(provider: "facebook").first.access_token
  end
+
 
 end
