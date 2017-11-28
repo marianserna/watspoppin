@@ -18,6 +18,11 @@ class StoriesController < ApplicationController
         word.chars.first == "#"
       end
 
+      #remove the hash symbol form each hashtag
+      hashtags.map! do |hashtag|
+        hashtag = hashtag.slice!(0)
+      end
+
       flash.notice = 'Story created'
       redirect_to root_path
     else
