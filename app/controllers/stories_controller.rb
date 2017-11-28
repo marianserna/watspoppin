@@ -6,7 +6,8 @@ class StoriesController < ApplicationController
   end
 
   def create
-    @story = Story.create(story_params)
+    @story = Story.new(story_params)
+    @story.user_id = current_user.id
     @story.source = "watspoppin"
 
     if @story.save
@@ -36,12 +37,6 @@ class StoriesController < ApplicationController
     end
 
     render json: @stories
-  end
-
-# Twitter Post Methods
-
-  def post_to_twitter
-    #code
   end
 
   private

@@ -4,6 +4,7 @@ class Story < ApplicationRecord
 
   has_and_belongs_to_many :hashtags
   belongs_to :user, optional: true
+  after_create :post_to_twitter
 
   def self.save_tweet(tweet)
     return if !tweet.respond_to?(:retweeted_status?)
@@ -39,4 +40,13 @@ class Story < ApplicationRecord
   def self.remove_old_tweets
     Story.where(source: "Twitter").where("created_at < ?", 24.hours.ago).delete_all
   end
+
+  # Twitter Post Methods
+  def post_to_twitter
+    if user && user.services.where(provider: "twitter").any?
+      user.twitter(self.content)
+    end
+  end
+
+
 end
