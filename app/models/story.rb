@@ -1,4 +1,7 @@
 class Story < ApplicationRecord
+
+  attr_reader :twitter, :facebook
+  
   mount_uploader :image, StoryImageUploader
   reverse_geocoded_by :latitude, :longitude
 
@@ -48,7 +51,7 @@ class Story < ApplicationRecord
       user.twitter(self.content)
     end
   end
-  
+
   # Facebook Post Methods
   def post_to_facebook
     if user && user.services.where(provider: "facebook").any?

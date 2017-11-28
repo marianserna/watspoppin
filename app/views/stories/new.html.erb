@@ -12,6 +12,17 @@
     <%= f.hidden_field :latitude , id: 'lat'%>
     <%= f.hidden_field :longitude , id: 'lon'%>
     <%= f.text_area :content, placeholder:"CONTENT", class: "field" %>
+
+    <div class="social-media">
+      <div class="media field">
+        <%= f.check_box :twitter, class: 'twitter'%> <span class="link-media">Post to Twitter</span>
+      </div>
+      
+      <div class="media field">
+        <%= f.check_box :facebook, class: 'facebook' %> <span class="link-media">Post to Facebook</span>
+      </div>
+    </div>
+
     <div class="actions">
       <%= f.submit "Create Story" %>
     </div>
