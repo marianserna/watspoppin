@@ -25,8 +25,9 @@ class User < ApplicationRecord
 
 # Facebook Access Methods
  def facebook(wall_post)
-   @client ||= Koala::Facebook::API.new(facebook_access_token)
-
+   @user ||= Koala::Facebook::API.new(facebook_access_token)
+   raise :test
+   @user.put_connections("me", "feed", message: wall_post)
  end
 
  def facebook_access_token

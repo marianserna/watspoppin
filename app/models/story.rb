@@ -4,7 +4,7 @@ class Story < ApplicationRecord
 
   has_and_belongs_to_many :hashtags
   belongs_to :user, optional: true
-  after_create :post_to_twitter
+  after_create :post_to_twitter, :post_to_facebook
 
   def self.save_tweet(tweet)
     return if !tweet.respond_to?(:retweeted_status?)
@@ -51,7 +51,8 @@ class Story < ApplicationRecord
   # Facebook Post Methods
   def post_to_facebook
     if user && user.services.where(provider: "facebook").any?
-      user.facebook(self.conent)
+      user.facebook(self.content)
+    end
   end
 
 
