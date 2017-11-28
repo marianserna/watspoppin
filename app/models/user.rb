@@ -25,16 +25,12 @@ class User < ApplicationRecord
 
 # Facebook Access Methods
  def facebook(wall_post)
-   # Koala.configure(koala_config)
-   @graph ||= Koala::Facebook::API.new(facebook_access_token)
+   @graph ||= self.services.where(provider: "facebook").first.facebook_client # call the facebook_client method in service model that refreshes our access token every time.
    raise :test
    # @graph.put_connections("me", "feed", message: wall_post)
    @graph.put_wall_post(wall_post)
  end
 
- def facebook_access_token
-   self.services.where(provider: "facebook").first.access_token
- end
 
 
 end
