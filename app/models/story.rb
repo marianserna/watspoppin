@@ -4,7 +4,6 @@ class Story < ApplicationRecord
 
   has_and_belongs_to_many :hashtags
   belongs_to :user, optional: true
-  after_create :post_to_twitter, :post_to_facebook
 
   def self.save_tweet(tweet)
     return if !tweet.respond_to?(:retweeted_status?)
