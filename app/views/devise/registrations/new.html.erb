@@ -4,24 +4,21 @@
     <div class="bottomColor"></div>
   </div>
 
-<section class="login_form">
-  <h2>SIGN UP</h2>
+  <section class="login_form">
+    <h2>SIGN UP</h2>
 
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), class: "login") do |f| %>
-    <%= devise_error_messages! %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), class: "login") do |f| %>
+      <%= devise_error_messages! %>
 
-    <%= f.text_field :name, autofocus: true, placeholder: 'NAME', class: "field" %>
-    <%= f.email_field :email, autofocus: true, placeholder: 'EMAIL', class: "field" %>
-    <%= f.password_field :password, autocomplete: "off", placeholder: "PASSWORD (#{@minimum_password_length} characters minimum)", class: "field" %>
-    <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: 'PASSWORD CONFIRMATION', class: "field" %>
+      <%= f.text_field :name, autofocus: true, placeholder: 'NAME', class: "field" %>
+      <%= f.email_field :email, autofocus: true, placeholder: 'EMAIL', class: "field" %>
+      <%= f.password_field :password, autocomplete: "off", placeholder: "PASSWORD (#{@minimum_password_length} characters minimum)", class: "field" %>
+      <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: 'PASSWORD CONFIRMATION', class: "field" %>
 
-    <div class="actions">
-      <%= f.submit "Sign up" %>
-    </div>
+      <div class="actions">
+        <%= f.submit "Sign up" %>
+      </div>
+    <% end %>
+  </section>
 
-
-  <% end %>
-</section>
-
-<%#removes the log in as links  %>
-<%# render "devise/shared/links" %>
+</div>
