@@ -11,6 +11,13 @@ class StoriesController < ApplicationController
     @story.source = "watspoppin"
 
     if @story.save
+
+      #create an array of the words in the tweet
+      content_words = @story.content.split(" ")
+      hashtags = content_words.select do |word|
+        word.chars.first == "#"
+      end
+
       flash.notice = 'Story created'
       redirect_to root_path
     else
