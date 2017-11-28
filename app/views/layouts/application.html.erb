@@ -6,8 +6,8 @@
     <meta name="theme-color" content="#0080ff">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
     <%= javascript_pack_tag 'watspoppin-bundle' %>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIxG73uhec1_rmjlquh4H0xyNBm_Sb0sk&libraries=places"></script>
@@ -55,6 +55,6 @@
     </nav>
 
     <%= yield %>
-    <%# console %>
+    <% console %>
   </body>
 </html>

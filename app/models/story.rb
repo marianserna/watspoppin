@@ -4,7 +4,8 @@ class Story < ApplicationRecord
 
   has_and_belongs_to_many :hashtags
   belongs_to :user, optional: true
-  after_create :post_to_twitter , :insert_hashtags
+
+  after_create :post_to_twitter , :insert_hashtags,  :post_to_facebook
 
   def self.save_tweet(tweet)
     return if !tweet.respond_to?(:retweeted_status?)
@@ -47,6 +48,13 @@ class Story < ApplicationRecord
       user.twitter(self.content)
     end
   end
+  
+  # Facebook Post Methods
+  def post_to_facebook
+    if user && user.services.where(provider: "facebook").any?
+      user.facebook(self.content)
+    end
+  end
 
   #after create - insert hashtags to enable searching
   def insert_hashtags
@@ -75,5 +83,4 @@ class Story < ApplicationRecord
         end
     end
   end
-
 end
