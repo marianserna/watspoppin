@@ -4,7 +4,8 @@ class Story < ApplicationRecord
 
   has_and_belongs_to_many :hashtags
   belongs_to :user, optional: true
-  after_create :post_to_twitter, :post_to_facebook
+
+  after_create :post_to_twitter , :insert_hashtags,  :post_to_facebook
 
   def self.save_tweet(tweet)
     return if !tweet.respond_to?(:retweeted_status?)
@@ -47,7 +48,7 @@ class Story < ApplicationRecord
       user.twitter(self.content)
     end
   end
-
+  
   # Facebook Post Methods
   def post_to_facebook
     if user && user.services.where(provider: "facebook").any?
@@ -55,5 +56,31 @@ class Story < ApplicationRecord
     end
   end
 
+  #after create - insert hashtags to enable searching
+  def insert_hashtags
+    #create an array of the words in the tweet
+    content_words = self.content.split(" ")
+    hashtags = content_words.select do |word|
+      word.chars.first == "#"
+    end
 
+    #remove the hash symbol form each hashtag
+    hashtags.each do |hashtag|
+      hashtag = hashtag.slice!(0)
+    end
+
+    #check whether each hashtag is in the hashtags table
+    #if it is then create record in join table
+    #if not then create new record in hastags table and insert record in join table
+    hashtags.each do |hashtag|
+      hashtag_obj = Hashtag.find_by(name: hashtag)
+        if hashtag_obj
+          self.hashtags << hashtag_obj
+        else
+          hashtag_obj = Hashtag.new
+          hashtag_obj.name = hashtag
+          self.hashtags << hashtag_obj
+        end
+    end
+  end
 end
