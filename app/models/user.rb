@@ -8,9 +8,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
-   def twitter(tweet)
-     @client ||= Twitter::REST::Client.new(twitter_config)
-     @client.update(tweet)
+# Twitter User methods
+  def twitter(tweet)
+   @client ||= Twitter::REST::Client.new(twitter_config)
+   @client.update(tweet)
   end
 
  def twitter_config
@@ -20,6 +21,16 @@ class User < ApplicationRecord
    access_token:         self.services.where(provider: "twitter").first.access_token,
    access_token_secret:  self.services.where(provider: "twitter").first.access_token_secret
    }
+ end
+
+# Facebook Access Methods
+ def facebook(wall_post)
+   @client ||= Koala::Facebook::API.new(facebook_access_token)
+
+ end
+
+ def facebook_access_token
+   self.services.where(provider: "facebook").first.access_token
  end
 
 end
