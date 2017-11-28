@@ -19,7 +19,7 @@ class StoriesController < ApplicationController
       end
 
       #remove the hash symbol form each hashtag
-      hashtags.map! do |hashtag|
+      hashtags.each do |hashtag|
         hashtag = hashtag.slice!(0)
       end
 
