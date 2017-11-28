@@ -25,7 +25,7 @@
 
 .login_form {
   position: absolute;
-  top: 20vh;
+  top: 10vh;
   margin: 0 auto;
   padding-top: 50px;
   width: 40vw;
@@ -93,5 +93,45 @@
   .actions {
     display: block;
     width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+}
+
+.social-media {
+  display: flex;
+  width: 100%;
+  margin-top: 30px;
+  margin-bottom: 15px;
+
+  .media.field {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .media-container {
+    text-decoration: none;
+    padding-top: 5px;
+  }
+
+  .link-media {
+    color: $highlight_text_color;
+    padding-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: color 1s ease;
+
+    &:hover {
+      color: $black;
+    }
+
+    .facebook,
+    .twitter {
+      width: 30%;
+      z-index: 5;
+    }
   }
 }
