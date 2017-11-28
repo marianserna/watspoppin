@@ -8,17 +8,18 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
-   def twitter
-     client = Twitter::REST::Client.new(twitter_config)
-   end
+   def twitter(tweet)
+     @client ||= Twitter::REST::Client.new(twitter_config)
+     @client.update(tweet)
+  end
 
-   def twitter_config
-     config = {
-     consumer_key:         "TWITTER_CONSUMER_KEY",
-     consumer_secret:      "TWITTER_CONSUMER_SECRET",
-     access_token:         "TWITTER_API_ACCESS_TOKEN",
-     access_token_secret:  "TWITTER_API_ACCESS_TOKEN_SECRET"
-     }
-   end
+ def twitter_config
+   config = {
+   consumer_key:         ENV["TWITTER_CONSUMER_KEY"],
+   consumer_secret:      ENV["TWITTER_CONSUMER_SECRET"],
+   access_token:         self.services.where(provider: "twitter").first.access_token,
+   access_token_secret:  self.services.where(provider: "twitter").first.access_token_secret
+   }
+ end
 
 end

@@ -6,8 +6,9 @@ class StoriesController < ApplicationController
   end
 
   def create
-    @story = Story.create(story_params)
-    # @story.source = "watspoppin"
+    @story = Story.new(story_params)
+    @story.user_id = current_user.id
+    @story.source = "watspoppin"
 
     if @story.save
       flash.notice = 'Story created'
@@ -38,16 +39,10 @@ class StoriesController < ApplicationController
     render json: @stories
   end
 
-# Twitter Post Methods
-
-  def post_to_twitter
-    #code
-  end
-
   private
 
   def story_params
-    params.require(:story).permit(:content, :image, :latitude, :longitude, :user_id)
+    params.require(:story).permit(:content, :image, :latitude, :longitude, :user_id, :soruce)
   end
 
   def require_login
