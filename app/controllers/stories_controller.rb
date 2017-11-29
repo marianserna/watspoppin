@@ -57,11 +57,11 @@ class StoriesController < ApplicationController
     end
   end
 
-  def facebook?
+  def linked_to_facebook?
     return current_user.services.where(provider: "facebook").any?
   end
 
-  def twitter?
+  def linked_to_twitter?
     return current_user.services.where(provider: "twitter").any?
   end
 

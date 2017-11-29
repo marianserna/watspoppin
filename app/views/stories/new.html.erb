@@ -13,13 +13,13 @@
     <%= f.hidden_field :longitude , id: 'lon'%>
     <%= f.text_area :content, placeholder:"CONTENT", class: "field" %>
 
-    <% if twitter? %>
+    <% if linked_to_twitter? %>
       <div class="media field">
         <%= f.check_box :twitter, class: 'twitter'%> <span class="link-media">Post to Twitter</span>
       </div>
     <% end %>
 
-    <% if facebook? %>
+    <% if linked_to_facebook? %>
       <div class="media field">
         <%= f.check_box :facebook, class: 'facebook' %> <span class="link-media">Post to Facebook</span>
       </div>
