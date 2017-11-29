@@ -1,6 +1,6 @@
 class StoriesController < ApplicationController
   before_action :require_login , only: [:new, :create]
-  helper_method :facebook? , :twitter?
+  helper_method :linked_to_twitter? , :linked_to_facebook? 
 
   def new
       @story = Story.new
