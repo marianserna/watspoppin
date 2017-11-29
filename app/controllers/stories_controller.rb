@@ -1,5 +1,6 @@
 class StoriesController < ApplicationController
   before_action :require_login , only: [:new, :create]
+  helper_method :facebook? , :twitter?
 
   def new
       @story = Story.new
@@ -56,12 +57,12 @@ class StoriesController < ApplicationController
     end
   end
 
+  def facebook?
+    return current_user.services.where(provider: "facebook").any?
+  end
+
+  def twitter?
+    return current_user.services.where(provider: "twitter").any?
+  end
 
 end
-# old Code that was refactored
-# @story = Story.new
-# @story.content = params[:story][:content]
-# @story.image = params[:story][:image]
-# @story.latitude = params[:story][:latitude]
-# @story.longitude = params[:story][:longitude]
-# @story.user_id = current_user.id
