@@ -31,7 +31,7 @@ class StoriesController < ApplicationController
   def search
     load_stories
 
-    if @stories.blank?
+    if @hashtag_stories.blank?
       begin
         twitter_searcher = TwitterSearcher.new(params[:hashtag], params[:latitude], params[:longitude])
         twitter_searcher.search
@@ -42,7 +42,7 @@ class StoriesController < ApplicationController
       end
     end
 
-    render json: @stories
+    render json: (@hashtag_stories.present? ? @hashtag_stories : @stories)
   end
 
   private
@@ -65,7 +65,7 @@ class StoriesController < ApplicationController
   def linked_to_twitter?
     return current_user.services.where(provider: "twitter").any?
   end
-    
+
   #extract hashtags from story content, remove hash symbol and return them
   def extract_hashtags(story)
     content_words = story.content.split(" ")
@@ -80,11 +80,13 @@ class StoriesController < ApplicationController
 
   def load_stories
     @hashtag = Hashtag.find_by(name: params[:hashtag].downcase.delete('#'))
-  
-    if @hashtag
-      @stories = @hashtag.stories.near([params[:latitude], params[:longitude]]).last(100)
+
+    @hashtag_stories = if @hashtag
+      @hashtag.stories.near([params[:latitude], params[:longitude]]).last(100)
     else
-      @stories = Story.near([params[:latitude], params[:longitude]]).last(100)
+      nil
     end
+
+    @stories = Story.near([params[:latitude], params[:longitude]]).last(100)
   end
 end
