@@ -1,6 +1,6 @@
 class StoriesController < ApplicationController
   before_action :require_login , only: [:new, :create]
-  helper_method :linked_to_twitter? , :linked_to_facebook? 
+  helper_method :linked_to_twitter? , :linked_to_facebook?
 
   def new
       @story = Story.new
@@ -12,6 +12,10 @@ class StoriesController < ApplicationController
     @story.source = "watspoppin"
 
     if @story.save
+
+      hashtags = extract_hashtags(@story)
+      @story.insert_hashtags(hashtags)
+
       flash.notice = 'Story created'
 
       @story.post_to_twitter if params[:twitter]
@@ -63,6 +67,18 @@ class StoriesController < ApplicationController
 
   def linked_to_twitter?
     return current_user.services.where(provider: "twitter").any?
+  end
+
+  #extract hashtags from story content, remove hash symbol and return them
+  def extract_hashtags(story)
+    content_words = story.content.split(" ")
+    hashtags = content_words.select do |word|
+      word.chars.first == "#"
+    end
+    hashtags.each do |hashtag|
+      hashtag = hashtag.slice!(0)
+    end
+    return hashtags
   end
 
 end
