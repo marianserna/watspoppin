@@ -9,7 +9,6 @@ class StoriesController < ApplicationController
   def create
     @story = Story.new(story_params)
     @story.user_id = current_user.id
-    @story.source = "watspoppin"
 
     if @story.save
 
@@ -51,7 +50,7 @@ class StoriesController < ApplicationController
   private
 
   def story_params
-    params.require(:story).permit(:content, :image, :latitude, :longitude, :user_id, :soruce)
+    params.require(:story).permit(:content, :image, :latitude, :longitude)
   end
 
   def require_login
