@@ -28,8 +28,8 @@ export default class Realtime extends React.Component {
     return (
       <div>
         <div className="stories">
-          {this.props.stories.map(story => (
-            <div key={story.id} className="realtime_story">
+          {this.props.stories.map((story, i) => (
+            <div key={i} className="realtime_story">
               <img
                 className={story.image.thumb.url ? 'user_img' : 'default_img'}
                 src={story.image.thumb.url ? story.image.thumb.url : '/twitter-logo.svg'}
