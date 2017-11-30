@@ -3,7 +3,7 @@ class StoriesController < ApplicationController
   helper_method :linked_to_twitter? , :linked_to_facebook?
 
   def new
-      @story = Story.new
+    @story = Story.new
   end
 
   def create
@@ -23,7 +23,7 @@ class StoriesController < ApplicationController
 
       redirect_to root_path
     else
-      flash.alert = 'Story could not be created. Please correct and try again.'
+      flash.alert = 'Story could not be created. Please correct errors and try again.'
       render 'new'
     end
 
