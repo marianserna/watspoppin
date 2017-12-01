@@ -65,6 +65,10 @@ group :test do
   gem 'rails-controller-testing', '~> 1.0', '>= 1.0.2'
 end
 
+group :production do
+  gem 'redis', '~> 4.0', '>= 4.0.1'
+end
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
