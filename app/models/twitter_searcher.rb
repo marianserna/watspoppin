@@ -15,8 +15,12 @@ class TwitterSearcher
   end
 
   def search
-    client.search(hashtag, geocode: "#{latitude},#{longitude},50km").each do |tweet|
+    start_time = Time.zone.now
+
+    client.search(hashtag, geocode: "#{latitude},#{longitude},10km").each do |tweet|
       Story.save_tweet(tweet)
+      # Heroku times out after 30 seconds, so let's stop saving tweets
+      break if (Time.zone.now - start_time) >= 25
     end
   end
 end

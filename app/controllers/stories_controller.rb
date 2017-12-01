@@ -82,11 +82,11 @@ class StoriesController < ApplicationController
     @hashtag = Hashtag.find_by(name: params[:hashtag].downcase.delete('#'))
 
     @hashtag_stories = if @hashtag
-      @hashtag.stories.near([params[:latitude], params[:longitude]]).last(100)
+      @hashtag.stories.near([params[:latitude], params[:longitude]], 10, units: :km).last(100)
     else
       nil
     end
 
-    @stories = Story.near([params[:latitude], params[:longitude]]).last(100)
+    @stories = Story.near([params[:latitude], params[:longitude]], 10, units: :km).last(100)
   end
 end

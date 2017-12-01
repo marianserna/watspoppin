@@ -2,7 +2,7 @@ class Story < ApplicationRecord
 
   attr_reader :twitter, :facebook
 
-  validates :content, presence: true, length: { maximum: 140 }
+  validates :content, presence: true, length: { maximum: 280 }
 
   mount_uploader :image, StoryImageUploader
   reverse_geocoded_by :latitude, :longitude
