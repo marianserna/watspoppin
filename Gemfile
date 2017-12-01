@@ -41,6 +41,7 @@ gem 'geocoder', '~> 1.4', '>= 1.4.4'
 gem 'celluloid-io', '~> 0.17.3'
 gem 'twitter', '~> 6.2'
 gem 'instagram', '~> 1.1', '>= 1.1.6'
+gem 'redis', '~> 4.0', '>= 4.0.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -63,10 +64,6 @@ end
 
 group :test do
   gem 'rails-controller-testing', '~> 1.0', '>= 1.0.2'
-end
-
-group :production do
-  gem 'redis', '~> 4.0', '>= 4.0.1'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
