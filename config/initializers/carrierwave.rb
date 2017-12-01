@@ -7,7 +7,7 @@ CarrierWave.configure do |config|
       aws_secret_access_key: ENV.fetch('AWS_SECRET_ACCESS_KEY'),
       region:                'us-east-1'
     }
-    config.fog_directory  = 'watspoppin'
+    config.fog_directory  = 'watspoppinapp'
     config.fog_attributes = { cache_control: "public, max-age=#{365.day.to_i}" }
   end
 end
