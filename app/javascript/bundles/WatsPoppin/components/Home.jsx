@@ -25,6 +25,7 @@ export default class Home extends React.Component {
     super(props);
 
     this.state = {
+      chrome: window.chrome,
       viewport: {
         latitude: props.latitude,
         longitude: props.longitude,
@@ -39,7 +40,7 @@ export default class Home extends React.Component {
     };
     this.socket = new Socket();
     this.socket.setupSubscription(
-      (data) => {
+      data => {
         this.setState({ stories: [data, ...this.state.stories] });
       },
       this.state.currentPosition.latitude,
@@ -48,29 +49,40 @@ export default class Home extends React.Component {
   }
 
   componentDidMount() {
-    this.socket.update(this.state.currentPosition.latitude, this.state.currentPosition.longitude);
+    this.socket.update(
+      this.state.currentPosition.latitude,
+      this.state.currentPosition.longitude
+    );
 
-    Annyang.addCommands({
-      'search (for) :hashtag in *location': (hashtag, location) => {
-        console.log(hashtag, location);
+    if (this.state.chrome) {
+      Annyang.addCommands({
+        'search (for) :hashtag in *location': (hashtag, location) => {
+          console.log(hashtag, location);
 
-        const geo = new window.google.maps.Geocoder();
-        geo.geocode({ address: location }, (results, status) => {
-          if (status === window.google.maps.GeocoderStatus.OK) {
-            const first_result = results[0];
-            const result_location = first_result.geometry.location;
+          const geo = new window.google.maps.Geocoder();
+          geo.geocode({ address: location }, (results, status) => {
+            if (status === window.google.maps.GeocoderStatus.OK) {
+              const first_result = results[0];
+              const result_location = first_result.geometry.location;
 
-            this.search(hashtag, result_location.lat(), result_location.lng());
+              this.search(
+                hashtag,
+                result_location.lat(),
+                result_location.lng()
+              );
 
-            if (window.speechSynthesis) {
-              const talk = new SpeechSynthesisUtterance(`Searching for ${hashtag} in ${location}`);
-              window.speechSynthesis.speak(talk);
+              if (window.speechSynthesis) {
+                const talk = new SpeechSynthesisUtterance(
+                  `Searching for ${hashtag} in ${location}`
+                );
+                window.speechSynthesis.speak(talk);
+              }
             }
-          }
-        });
-      }
-    });
-    Annyang.start();
+          });
+        }
+      });
+      Annyang.start();
+    }
   }
 
   updateCurrentPosition = (lat, lng) => {
@@ -82,7 +94,7 @@ export default class Home extends React.Component {
     });
   };
 
-  updateViewport = (viewport) => {
+  updateViewport = viewport => {
     this.setState({
       viewport
     });
@@ -113,10 +125,10 @@ export default class Home extends React.Component {
           longitude
         }
       })
-      .then((response) => {
+      .then(response => {
         this.setState({ stories: response.data });
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
 
@@ -128,10 +140,14 @@ export default class Home extends React.Component {
       <div className="home_container">
         <img src="logo.svg" alt="WatsPoppin logo" id="logo" />
 
-        <section className={`map_container ${this.state.mapExpanded ? 'map_expanded' : ''}`}>
+        <section
+          className={`map_container ${
+            this.state.mapExpanded ? 'map_expanded' : ''
+          }`}
+        >
           <button
             className="expand"
-            onClick={(e) => {
+            onClick={e => {
               this.setState({ mapExpanded: !this.state.mapExpanded });
 
               window.dispatchEvent(new Event('resize'));
@@ -151,18 +167,27 @@ export default class Home extends React.Component {
           />
         </section>
 
-        <section className={`realtime_container ${this.state.mapExpanded ? 'map_expanded' : ''}`}>
+        <section
+          className={`realtime_container ${
+            this.state.mapExpanded ? 'map_expanded' : ''
+          }`}
+        >
           <Search
             className="search"
             search={this.search}
             currentPosition={this.state.currentPosition}
           />
-          <p className="voice_search">
-            <span>
-              For voice search pronounce "Search <strong>HASHTAG</strong> in{' '}
-              <strong>LOCATION</strong>"
-            </span>
-          </p>
+
+          {this.state.chrome ? (
+            <p className="voice_search">
+              <span>
+                For voice search pronounce "Search <strong>HASHTAG</strong> in{' '}
+                <strong>LOCATION</strong>"
+              </span>
+            </p>
+          ) : (
+            ''
+          )}
 
           <Realtime
             className="realtime"
