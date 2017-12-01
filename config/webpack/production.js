@@ -1,9 +1,9 @@
 const environment = require('./environment');
-
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const merge = require('webpack-merge');
 
 module.exports = merge({
+  // used to ensure only 1 UglifyJsPlugin in final webpack array
   customizeArray: merge.unique(
     'plugins',
     ['UglifyJsPlugin'],
@@ -14,9 +14,11 @@ module.exports = merge({
     plugins: [
       new UglifyJsPlugin({
         sourceMap: true,
-        compress: {
-          warnings: false,
-          comparisons: false // don't optimize comparisons
+        uglifyOptions: {
+          compress: {
+            warnings: false,
+            comparisons: false
+          }
         }
       })
     ]
