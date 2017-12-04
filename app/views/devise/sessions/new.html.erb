@@ -6,7 +6,7 @@
 
   <section class="login_form">
     <h2>LOGIN</h2>
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "login"}) do |f| %>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form login"}) do |f| %>
       <%= f.email_field :email, placeholder: 'EMAIL', class: "field", autofocus: true %>
       <%= f.password_field :password, placeholder: 'PASSWORD', class: "field", autocomplete: "off" %>
 

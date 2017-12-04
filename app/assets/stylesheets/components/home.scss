@@ -9,6 +9,15 @@
     width: 150px;
     height: 150px;
     z-index: 3;
+
+    @media (max-width: 1296px) {
+      width: 100px;
+      height: 100px;
+    }
+  }
+
+  @media (max-width: 1296px) {
+    display: block;
   }
 }
 
@@ -23,6 +32,12 @@
   &.map_expanded {
     width: 100vw;
   }
+
+  @media (max-width: 1296px) {
+    display: block;
+    width: $total_width;
+    border: none;
+  }
 }
 
 .expand {
@@ -34,6 +49,19 @@
   color: $highlight_text_color;
   font-weight: bold;
   background: transparent;
+  transition: color 1s ease;
+
+  @media (max-width: 1296px) {
+    display: none;
+  }
+
+  &:hover {
+    color: #000;
+  }
+
+  &:focus {
+    outline: 0;
+  }
 }
 
 .map {
@@ -48,10 +76,6 @@
   background-color: #ab47bc;
   position: relative;
 
-  // form {
-  //   margin-bottom: 50px;
-  // }
-
   .voice_search {
     height: 60px;
     text-align: center;
@@ -59,7 +83,6 @@
     border-bottom: 3px solid #000;
     margin-bottom: 30px;
     color: $highlight_text_color;
-    // font-size: $card_font_size;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -72,4 +95,21 @@
   &.map_expanded {
     display: none;
   }
+
+  @media (max-width: 1296px) {
+    display: block;
+    width: $total_width;
+  }
+}
+
+.notice,
+.alert {
+  background-color: $highlight_text_color;
+  color: #fff;
+  padding: 30px;
+  position: absolute;
+  top: 50%;
+  left: 30%;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  z-index: 100;
 }
