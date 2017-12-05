@@ -17,7 +17,8 @@
   }
 
   @media (max-width: 1296px) {
-    display: block;
+    display: flex;
+    flex-direction: column-reverse;
   }
 }
 
