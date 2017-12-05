@@ -14,8 +14,6 @@ export default class Socket {
       },
       {
         received: (data) => {
-          console.log('received data');
-          console.log(data);
           // function receives new data and updates the state
           onNewStories(data);
         }
