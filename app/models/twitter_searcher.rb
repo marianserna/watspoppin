@@ -1,4 +1,5 @@
 class TwitterSearcher
+  include Celluloid::IO
   attr_accessor :hashtag, :latitude, :longitude, :client
 
   def initialize(hashtag, latitude, longitude)
@@ -18,9 +19,16 @@ class TwitterSearcher
     start_time = Time.zone.now
 
     client.search(hashtag, geocode: "#{latitude},#{longitude},10km").each do |tweet|
-      Story.save_tweet(tweet)
+      story = Story.save_tweet(tweet)
+
+      if story
+        ActionCable.server.broadcast('stories_channel', story)
+      end
+
       # Heroku times out after 30 seconds, so let's stop saving tweets
-      break if (Time.zone.now - start_time) >= 25
+      # break if (Time.zone.now - start_time) >= 25
     end
+
+    self.terminate
   end
 end

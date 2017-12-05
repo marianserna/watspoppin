@@ -7,6 +7,10 @@ class StoriesChannel < ApplicationCable::Channel
     stream_from "stories_channel"
   end
 
+  def stop_realtime
+    @streamer.terminate
+  end
+
   def unsubscribed
     # Any cleanup needed when channel is unsubscribed
     @streamer.terminate

@@ -9,11 +9,13 @@ export default class Socket {
     this.subscription = this.cable.subscriptions.create(
       {
         channel: 'StoriesChannel',
-        latitude: latitude,
-        longitude: longitude
+        latitude,
+        longitude
       },
       {
-        received: data => {
+        received: (data) => {
+          console.log('received data');
+          console.log(data);
           // function receives new data and updates the state
           onNewStories(data);
         }
