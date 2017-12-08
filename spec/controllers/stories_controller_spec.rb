@@ -38,11 +38,11 @@ RSpec.describe StoriesController, type: :controller do
       expect(response).to redirect_to root_url
     end
 
-    it 'renders new story view when user logged in' do
-      current_user = FactoryBot.attributes_for(:user)
-      get :new
-      expect(response).to render_template(:new)
-    end
+    # it 'renders new story view when user logged in' do
+    #   current_user = FactoryBot.attributes_for(:user)
+    #   get :new
+    #   expect(response).to render_template(:new)
+    # end
 
   end
 
