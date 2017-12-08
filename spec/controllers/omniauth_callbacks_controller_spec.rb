@@ -52,18 +52,18 @@ RSpec.fdescribe Users::OmniauthCallbacksController, type: :controller do
       end
     end
 
-    # context "when facebook email already exist in the system" do
-    #   before(:each) do
-    #     facebook_auth_hash
-    #
-    #     User.create!(:email => "user@email.com", :password => "password")
-    #     get :facebook
-    #   end
-    #
-    #   it { flash[:notice].should == "Your email user@email.com is already exist in the system. You need to sign in first."}
-    #
-    #   it { response.should redirect_to new_user_session_path }
-    # end
+    context "when facebook email already exist in the system" do
+      before(:each) do
+        facebook_auth_hash
+
+        User.create!(:email => "user@email.com", :password => "password")
+        get :facebook
+      end
+
+      it { flash[:notice].should == "Your email user@email.com is already exist in the system. You need to sign in first."}
+
+      it { response.should redirect_to new_user_session_path }
+    end
   end
   #
   # describe "#logged in user" do
