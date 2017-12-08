@@ -51,6 +51,7 @@ group :development, :test do
   gem 'guard-rspec', '~> 4.7', '>= 4.7.3'
   gem 'pry-rails', '~> 0.3.6'
   gem 'dotenv-rails', '~> 2.2', '>= 2.2.1'
+  gem 'coderay', '~> 1.1', '>= 1.1.1'
 end
 
 group :development do
