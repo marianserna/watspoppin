@@ -1,8 +1,8 @@
 require "rails_helper"
 
 RSpec.fdescribe Users::OmniauthCallbacksController, type: :controller do
-  let(:user) { FactoryBot.create(:user) }
-  let(:service) {FactoryBot.create(:service)}
+  # let(:user) { FactoryBot.create(:user) }
+  # let(:service) {FactoryBot.create(:service)}
   before(:each) do
     @request.env["devise.mapping"] = Devise.mappings[:user]
   end
@@ -21,7 +21,7 @@ RSpec.fdescribe Users::OmniauthCallbacksController, type: :controller do
   #   end
   # end
 
-  describe "#guest user" do
+  describe "#New user" do
     context "when facebook email doesn't exist in the system" do
       before(:each) do
         facebook_auth_hash
@@ -73,32 +73,44 @@ RSpec.fdescribe Users::OmniauthCallbacksController, type: :controller do
       end
     end
   end
-  #
-  # describe "#logged in user" do
-  #   context "when user don't have facebook service" do
-  #     before(:each) do
-  #       facebook_auth_hash
-  #
-  #       User.create!(name: "User", email: "user@email.com", password: "password")
-  #       sign_in user
-  #
-  #       get :user_facebook_omniauth_callback
-  #     end
-  #
-  #     it "should add facebook service to current user" do
-  #       user = User.where(:email => "user@example.com").first
-  #       user.should_not be_nil
-  #       fb_service = user.services.where(:provider => "facebook").first
-  #       fb_service.should_not be_nil
-  #       fb_service.uid.should == "123456"
-  #     end
-  #
-  #     it { should be_user_signed_in }
-  #
-  #     it { response.should redirect_to services_path }
-  #
-  #     it { flash[:notice].should == "Facebook is connected with your account."}
-  #   end
+
+  describe "#logged in user" do
+    context "when user don't have facebook service" do
+      before(:each) do
+        facebook_auth_hash
+        user = User.create!(name: "User", email: "user@email.com", password: "password")
+        sign_in user
+        get :facebook
+      end
+
+      it "should add facebook service to current user" do
+        user = User.where(email: "user@email.com").first
+
+        expect(user).to_not be_nil
+
+        fb_service = user.services.where(provider: "facebook").first
+
+        expect(fb_service).to_not be_nil
+
+        expect(fb_service.uid).to eq("123456")
+      end
+
+      # it { should be_user_signed_in }
+      it "should be signed in as the user" do
+        # expect(@user).to_be user_signed_in
+        expect be_user_signed_in
+      end
+
+      it "redirects to Profile page" do
+        expect(response).to redirect_to edit_user_registration_path
+      end
+
+      it "flashes a notice - Facebook Connected" do
+        expect(flash[:notice]).to eq("Your #{facebook_auth_hash.provider} is now Connected")
+      end
+
+    end
+
   #
   #   context "when user already connect with facebook" do
   #     before(:each) do
@@ -125,6 +137,6 @@ RSpec.fdescribe Users::OmniauthCallbacksController, type: :controller do
   #     it { response.should redirect_to tasks_path }
   #
     # end
-    # end
+    end
 
 end
