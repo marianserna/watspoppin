@@ -30,7 +30,7 @@ RSpec.fdescribe Users::OmniauthCallbacksController, type: :controller do
       end
 
       # it { @user.should_not be_nil }
-      it "@user should not be nit" do
+      it "@user should not be nil" do
         expect(@user).to_not eq(nil)
       end
 
@@ -40,17 +40,24 @@ RSpec.fdescribe Users::OmniauthCallbacksController, type: :controller do
         expect(service).to_not eq(nil)
       end
 
-      it { should be_user_signed_in }
+      # it { should be_user_signed_in }
+      it "should be signed in as the user" do
+        # expect(@user).to_be user_signed_in
+        expect be_user_signed_in
+      end
 
-      it { response.should redirect_to tasks_path }
+      # it { response.should redirect_to tasks_path }
+      it "redirect_to root" do
+        expect(response).to redirect_to root_path
+      end
     end
 
     # context "when facebook email already exist in the system" do
     #   before(:each) do
     #     facebook_auth_hash
     #
-    #     User.create!(:email => "user@email.com", :password => "my_secret")
-    #     get :user_facebook_omniauth_callback
+    #     User.create!(:email => "user@email.com", :password => "password")
+    #     get :facebook
     #   end
     #
     #   it { flash[:notice].should == "Your email user@email.com is already exist in the system. You need to sign in first."}
@@ -64,7 +71,7 @@ RSpec.fdescribe Users::OmniauthCallbacksController, type: :controller do
   #     before(:each) do
   #       facebook_auth_hash
   #
-  #       user = User.create!(:email => "user@example.com", :password => "my_secret")
+  #       user = User.create!(:email => "user@example.com", :password => "password")
   #       sign_in user
   #
   #       get :user_facebook_omniauth_callback
@@ -89,7 +96,7 @@ RSpec.fdescribe Users::OmniauthCallbacksController, type: :controller do
   #     before(:each) do
   #       facebook_auth_hash
   #
-  #       user = User.create!(:email => "user@email.com", :password => "my_secret")
+  #       user = User.create!(:email => "user@email.com", :password => "password")
   #       user.services.create!(:provider => "facebook", :uid => "123456")
   #       sign_in user
   #
