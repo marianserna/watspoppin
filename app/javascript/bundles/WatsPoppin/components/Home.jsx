@@ -123,7 +123,7 @@ export default class Home extends React.Component {
         console.log(error);
       });
 
-    this.socket.unsubscribe();
+    this.socket.subscription.perform('stop_realtime', {});
   };
 
   render() {
