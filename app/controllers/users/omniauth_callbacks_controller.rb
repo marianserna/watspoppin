@@ -55,7 +55,7 @@ private
       @user = service.user
     elsif User.where(email: auth.info.email).any?
       # 5. user is logged out and they log in to a new account that doesnt match their old one, we throw exception to let them know
-        flash[:alert] = "An Account already exists, pelase connect with #{auth.provider.titalize} accout"
+        flash[:alert] = "An Account already exists, pelase connect with #{auth.provider.titleize} accout"
         redirect_to new_user_session_path
     else
       # if doesnt exist, create the user,

@@ -18,9 +18,13 @@ exports[`Realtime Renders correctly 1`] = `
       >
         Gorvachov puff puff
       </p>
-      <p>
-        Locavore mumblecore XOXO seitan, jean shorts williamsburg flannel pickled...
-      </p>
+      <span
+        class="Linkify"
+      >
+        <p>
+          Locavore mumblecore XOXO seitan, jean shorts williamsburg flannel pickled...
+        </p>
+      </span>
     </div>
   </div>
   <div

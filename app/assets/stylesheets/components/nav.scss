@@ -40,6 +40,12 @@ nav {
     display: block;
     margin: 0 auto;
     margin-top: 5px;
+
+    @media (max-width: 1296px) {
+      margin-top: 20px;
+      width: 40px;
+      height: 40px;
+    }
   }
 
   .left-nav:hover,
@@ -83,5 +89,11 @@ nav {
       text-decoration: none;
       color: $button_text_color;
     }
+  }
+
+  @media (max-width: 1296px) {
+    right: 30px;
+    top: 50px;
+    width: 60%;
   }
 }

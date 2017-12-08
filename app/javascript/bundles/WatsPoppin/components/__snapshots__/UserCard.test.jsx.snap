@@ -18,8 +18,12 @@ exports[`renders user card when user is present 1`] = `
     alt="Maria Antonieta de las Nieves"
     src="/luigi.jpg"
   />
-  <figcaption>
-    Maria Antonieta de las Nieves
-  </figcaption>
+  <span
+    class="Linkify"
+  >
+    <figcaption>
+      Maria Antonieta de las Nieves
+    </figcaption>
+  </span>
 </figure>
 `;
