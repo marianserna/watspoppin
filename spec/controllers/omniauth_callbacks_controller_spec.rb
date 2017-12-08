@@ -60,7 +60,7 @@ RSpec.fdescribe Users::OmniauthCallbacksController, type: :controller do
         get :facebook
       end
 
-      it { flash[:notice].should == "Your email user@email.com is already exist in the system. You need to sign in first."}
+      it { flash[:alert].should == "An Account already exists, pelase connect with #{facebook_auth_hash.provider.titleize} accout"}
 
       it { response.should redirect_to new_user_session_path }
     end
