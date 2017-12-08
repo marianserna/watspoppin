@@ -36,7 +36,7 @@ RSpec.fdescribe Users::OmniauthCallbacksController, type: :controller do
 
 
       it "should create service with facebook id" do
-        service = @user.services.where(:provider => "facebook", :uid => "123456").first
+        service = @user.services.where(provider: "facebook", uid: "123456").first
         expect(service).to_not eq(nil)
       end
 
@@ -52,18 +52,26 @@ RSpec.fdescribe Users::OmniauthCallbacksController, type: :controller do
       end
     end
 
-    # context "when facebook email already exist in the system" do
-    #   before(:each) do
-    #     facebook_auth_hash
-    #
-    #     User.create!(:email => "user@email.com", :password => "password")
-    #     get :facebook
-    #   end
-    #
-    #   it { flash[:notice].should == "Your email user@email.com is already exist in the system. You need to sign in first."}
-    #
-    #   it { response.should redirect_to new_user_session_path }
-    # end
+    context "when facebook email already exist in the system" do
+      before(:each) do
+        facebook_auth_hash
+
+        User.create!(name: "User", email: "user@email.com", password: "password")
+        get :facebook
+      end
+
+      # it { flash[:alert].should == }
+
+      it "flashes an alert message" do
+        expect(flash[:alert]).to eq("An Account already exists, pelase connect with #{facebook_auth_hash.provider.titleize} accout")
+      end
+
+      # it { response.should redirect_to new_user_session_path }
+
+      it "redirects to sign in page" do
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
   end
   #
   # describe "#logged in user" do
@@ -71,7 +79,7 @@ RSpec.fdescribe Users::OmniauthCallbacksController, type: :controller do
   #     before(:each) do
   #       facebook_auth_hash
   #
-  #       user = User.create!(:email => "user@example.com", :password => "password")
+  #       User.create!(name: "User", email: "user@email.com", password: "password")
   #       sign_in user
   #
   #       get :user_facebook_omniauth_callback
@@ -96,7 +104,7 @@ RSpec.fdescribe Users::OmniauthCallbacksController, type: :controller do
   #     before(:each) do
   #       facebook_auth_hash
   #
-  #       user = User.create!(:email => "user@email.com", :password => "password")
+  #       User.create!(name: "User", email: "user@email.com", password: "password")
   #       user.services.create!(:provider => "facebook", :uid => "123456")
   #       sign_in user
   #
