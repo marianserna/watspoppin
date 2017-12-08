@@ -44,4 +44,14 @@ RSpec.describe Story, type: :model do
       expect(Story.count).to eq(0)
     end
   end
+
+  describe 'create story' do
+    it 'create instance of story model and make sure it saves' do
+      story = Story.new
+      story.content = "this is a test"
+      story.save
+      expect(story.persisted?).to eql(true)
+    end
+  end
+
 end
