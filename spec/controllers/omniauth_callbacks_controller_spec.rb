@@ -36,7 +36,7 @@ RSpec.fdescribe Users::OmniauthCallbacksController, type: :controller do
 
 
       it "should create service with facebook id" do
-        service = @user.services.where(:provider => "facebook", :uid => "123456").first
+        service = @user.services.where(provider: "facebook", uid: "123456").first
         expect(service).to_not eq(nil)
       end
 
@@ -56,7 +56,7 @@ RSpec.fdescribe Users::OmniauthCallbacksController, type: :controller do
       before(:each) do
         facebook_auth_hash
 
-        User.create!(:email => "user@email.com", :password => "password")
+        User.create!(name: "User", email: "user@email.com", password: "password")
         get :facebook
       end
 
@@ -71,7 +71,7 @@ RSpec.fdescribe Users::OmniauthCallbacksController, type: :controller do
   #     before(:each) do
   #       facebook_auth_hash
   #
-  #       user = User.create!(:email => "user@example.com", :password => "password")
+  #       User.create!(name: "User", email: "user@email.com", password: "password")
   #       sign_in user
   #
   #       get :user_facebook_omniauth_callback
@@ -96,7 +96,7 @@ RSpec.fdescribe Users::OmniauthCallbacksController, type: :controller do
   #     before(:each) do
   #       facebook_auth_hash
   #
-  #       user = User.create!(:email => "user@email.com", :password => "password")
+  #       User.create!(name: "User", email: "user@email.com", password: "password")
   #       user.services.create!(:provider => "facebook", :uid => "123456")
   #       sign_in user
   #
