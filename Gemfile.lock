@@ -377,6 +377,7 @@ DEPENDENCIES
   byebug
   carrierwave (~> 1.2, >= 1.2.1)
   celluloid-io (~> 0.17.3)
+  coderay (~> 1.1, >= 1.1.1)
   coffee-rails (~> 4.2)
   devise
   dotenv-rails (~> 2.2, >= 2.2.1)
