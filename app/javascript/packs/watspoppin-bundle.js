@@ -1,7 +1,7 @@
 import ReactOnRails from 'react-on-rails';
 
 import Home from '../bundles/WatsPoppin/components/Home';
-import Map from '../bundles/WatsPoppin/components/Map';
+import Flash from '../bundles/WatsPoppin/Flash';
 
 ReactOnRails.register({
   Home
