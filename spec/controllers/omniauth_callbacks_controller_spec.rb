@@ -40,13 +40,10 @@ RSpec.fdescribe Users::OmniauthCallbacksController, type: :controller do
         expect(service).to_not eq(nil)
       end
 
-      # it { should be_user_signed_in }
       it "should be signed in as the user" do
-        # expect(@user).to_be user_signed_in
         expect be_user_signed_in
       end
 
-      # it { response.should redirect_to tasks_path }
       it "redirect_to root" do
         expect(response).to redirect_to root_path
       end
@@ -60,13 +57,9 @@ RSpec.fdescribe Users::OmniauthCallbacksController, type: :controller do
         get :facebook
       end
 
-      # it { flash[:alert].should == }
-
       it "flashes an alert message" do
         expect(flash[:alert]).to eq("An Account already exists, pelase connect with #{facebook_auth_hash.provider.titleize} accout")
       end
-
-      # it { response.should redirect_to new_user_session_path }
 
       it "redirects to sign in page" do
         expect(response).to redirect_to new_user_session_path
@@ -95,9 +88,7 @@ RSpec.fdescribe Users::OmniauthCallbacksController, type: :controller do
         expect(fb_service.uid).to eq("123456")
       end
 
-      # it { should be_user_signed_in }
       it "should be signed in as the user" do
-        # expect(@user).to_be user_signed_in
         expect be_user_signed_in
       end
 
