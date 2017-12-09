@@ -68,6 +68,5 @@ module ControllerMacros
         :token => "token", # The OAuth 2.0 access token
         :secret => "secret"
     }})
-end
-
+  end
 end

@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :service do
     user
-    provider "facebook"
+    provider "twitter"
     uid "123456"
     access_token "token"
     access_token_secret "secret"
