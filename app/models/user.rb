@@ -31,7 +31,7 @@ class User < ApplicationRecord
  def facebook(wall_post)
    @graph ||= self.services.where(provider: "facebook").first.facebook_client # call the facebook_client method in service model that refreshes our access token every time.
    # raise :test
-   # @graph.put_connections("me", "feed", message: wall_post)
+   # @graph.put_connections("me", "feed", message: wall_post) alternate method to the refactored below
    @graph.put_wall_post(wall_post)
  end
 

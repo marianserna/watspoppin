@@ -27,7 +27,6 @@ RSpec.describe User, type: :model do
   end
 
   describe "Associations" do
-    # let(:user) {FactoryBot.create(:user)}
 
     it "has many stories" do
       assc = User.reflect_on_association(:stories)
@@ -39,5 +38,36 @@ RSpec.describe User, type: :model do
       expect(assc.macro).to eq(:has_many)
     end
   end
+
+  describe "post a " do
+
+    before(:each) do
+
+    end
+
+    let(:user) {FactoryBot.create(:user)}
+    let(:service) {FactoryBot.create(:service)}
+    it "tweet" do
+
+      client = instance_double(Twitter::REST::Client, {
+        update: "This is a Tweet!"
+        })
+      # client = Twitter::REST::Client.new(twitter_config_mock)
+      tweet = client.update("This is a Tweet!")
+      expect(tweet).to eq("This is a Tweet!")
+    end
+
+    it "wall posts" do
+      graph = instance_double(Koala::Facebook::API, {
+        put_wall_post: "This is a Wall Post!"
+        })
+
+      wall_post = graph.put_wall_post("This is a Wall Post!")
+
+      expect(wall_post).to eq("This is a Wall Post!")
+    end
+  end
+
+
 
 end
