@@ -44,19 +44,15 @@
     "webpack-dev-server": "^2.9.4"
   },
   "jest": {
-    "setupFiles": [
-      "./jestsetup.js"
-    ],
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ],
+    "setupFiles": ["./jestsetup.js"],
+    "snapshotSerializers": ["enzyme-to-json/serializer"],
     "transform": {
       "^.+\\.jsx?$": "babel-jest"
     }
   },
   "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test": "jest app/javascript",
+    "test:watch": "jest app/javascript --watch",
+    "test:coverage": "jest app/javascript --coverage"
   }
 }
