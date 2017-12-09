@@ -1,5 +1,13 @@
 .realtime_container {
   position: relative;
+
+  @media (max-width: 1296px) {
+    display: none;
+
+    &.active {
+      display: block;
+    }
+  }
 }
 
 .stories {

@@ -36,8 +36,10 @@ export default class Home extends React.Component {
         latitude: props.latitude,
         longitude: props.longitude
       },
-      stories: props.stories
+      stories: props.stories,
+      current_view: 'list'
     };
+
     this.socket = new Socket();
     this.socket.setupSubscription(
       (data) => {
@@ -131,7 +133,34 @@ export default class Home extends React.Component {
       <div className="home_container">
         <img src="logo.svg" alt="WatsPoppin logo" id="logo" />
 
-        <section className={`map_container ${this.state.mapExpanded ? 'map_expanded' : ''}`}>
+        <div className="toggles">
+          {this.state.current_view === 'list' ? (
+            <button
+              onClick={(e) => {
+                e.preventDefault(e);
+                this.setState({ current_view: 'map' });
+                window.dispatchEvent(new Event('resize'));
+              }}
+            >
+              MAP
+            </button>
+          ) : (
+            <button
+              onClick={(e) => {
+                e.preventDefault(e);
+                this.setState({ current_view: 'list' });
+              }}
+            >
+              LIST
+            </button>
+          )}
+        </div>
+
+        <section
+          className={`map_container ${this.state.mapExpanded ? 'map_expanded' : ''} ${
+            this.state.current_view === 'map' ? 'active' : ''
+          }`}
+        >
           <button
             className="expand"
             onClick={(e) => {
@@ -154,7 +183,11 @@ export default class Home extends React.Component {
           />
         </section>
 
-        <section className={`realtime_container ${this.state.mapExpanded ? 'map_expanded' : ''}`}>
+        <section
+          className={`realtime_container ${this.state.mapExpanded ? 'map_expanded' : ''} ${
+            this.state.current_view === 'list' ? 'active' : ''
+          }`}
+        >
           <Search
             className="search"
             search={this.search}

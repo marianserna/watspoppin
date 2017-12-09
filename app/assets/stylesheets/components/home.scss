@@ -2,6 +2,31 @@
   position: relative;
   display: flex;
 
+  .toggles {
+    display: none;
+
+    @media (max-width: 1296px) {
+      display: block;
+      position: absolute;
+      top: 135px;
+      right: 25px;
+    }
+
+    button {
+      background: none;
+      color: $highlight_text_color;
+      transition: color 1s ease;
+
+      &:hover {
+        color: #000;
+      }
+
+      &:focus {
+        outline: 0;
+      }
+    }
+  }
+
   #logo {
     position: absolute;
     top: 15px;
@@ -19,6 +44,7 @@
   @media (max-width: 1296px) {
     display: flex;
     flex-direction: column-reverse;
+    padding-top: 180px;
   }
 }
 
@@ -35,9 +61,13 @@
   }
 
   @media (max-width: 1296px) {
-    display: block;
+    display: none;
     width: $total_width;
     border: none;
+
+    &.active {
+      display: block;
+    }
   }
 }
 
