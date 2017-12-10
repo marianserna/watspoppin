@@ -32,25 +32,54 @@ RSpec.describe StoriesController, type: :controller do
     end
   end
 
-  describe 'GET #new' do
-    it "requires login when clicking story button" do
-      get :new
-      expect(response).to redirect_to root_url
+  fdescribe 'New Story' do
+
+    context 'when user is not logged in' do
+
+      it "redirects to root path" do
+        get :new
+        expect(response).to redirect_to root_url
+      end
+
+      it 'flashes a notice to log in' do
+        get :new
+        expect(flash[:notice]).to eq("Please log-in to create a story")
+      end
+
+      it "cannot post story" do
+        post :create, :params => { :story => FactoryBot.attributes_for(:story) }
+        expect(response).to redirect_to root_url
+      end
+
     end
 
-    # it 'renders new story view when user logged in' do
-    #   current_user = FactoryBot.attributes_for(:user)
-    #   get :new
-    #   expect(response).to render_template(:new)
-    # end
+    context 'when user is logged in' do
+      before(:each) do
+        user = FactoryBot.create(:user)
+        sign_in user
+          get :new
+      end
+      it 'renders new story view' do
+        expect(response).to render_template(:new)
+      end
+      it 'if story saved, it redirects to root path' do
+        story = FactoryBot.attributes_for(:story)
+        post :create, :params => { :story => story }
+        expect(response).to redirect_to root_path
+      end
 
-  end
+      it "if story doesn't save, it flashes message and renders the new template again" do
+        story = {:content => nil, :image => nil, :latitude => nil, :longitude => nil}
+        post :create, params: { story: story }
 
-  describe "POST #create" do
-    it "requires login when posting to stories#create" do
-      post :create, :params => { :story => FactoryBot.attributes_for(:story) }
-      expect(response).to redirect_to root_url
+        expect(flash[:alert]).to  eq('Story could not be created. Please correct errors and try again.')
+        expect(response).to render_template(:new)
+      end
+
+
+
     end
+
   end
 
 end
