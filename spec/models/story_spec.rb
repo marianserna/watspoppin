@@ -18,7 +18,7 @@ RSpec.describe Story, type: :model do
           longitude: -79.3832
         }),
         media: [OpenStruct.new({
-          media_uri_https: 'https://www.runnersworld.com/sites/runnersworld.com/files/styles/listicle_slide_custom_user_phone_1x/public/beagle2.jpg?itok=lv5EvG-2'
+          media_uri_https: 'https://s3.amazonaws.com/leighhalliday/uploads/files/000/000/005/square_1440/IMG_0606.JPG?1415732506'
         })],
         hashtags: [OpenStruct.new({
           text: 'dogdogdog'
