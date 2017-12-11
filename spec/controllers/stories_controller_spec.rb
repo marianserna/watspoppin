@@ -3,9 +3,6 @@ require 'rails_helper'
 RSpec.describe StoriesController, type: :controller do
   describe 'GET search' do
     it 'finds and returns stories as json' do
-      # mocking with method stubs --> don't render search method(twitter_searcher.search)
-      expect_any_instance_of(TwitterSearcher).to receive(:search)
-
       hashtag = create(:hashtag)
       story = create(:story, {hashtags: [hashtag]})
 
