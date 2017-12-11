@@ -31,11 +31,13 @@ class StoriesController < ApplicationController
   def search
     load_stories
 
-    begin
-      twitter_searcher = TwitterSearcher.new(params[:hashtag], params[:latitude], params[:longitude])
-      twitter_searcher.async.search
-    rescue Twitter::Error::TooManyRequests
-      puts 'Twitter too many requests'
+    unless Rails.env.test?
+      begin
+        twitter_searcher = TwitterSearcher.new(params[:hashtag], params[:latitude], params[:longitude])
+        twitter_searcher.async.search
+      rescue Twitter::Error::TooManyRequests
+        puts 'Twitter too many requests'
+      end
     end
 
     # render json: (@hashtag_stories.present? ? @hashtag_stories : @stories)
