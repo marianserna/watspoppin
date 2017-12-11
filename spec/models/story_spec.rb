@@ -54,4 +54,22 @@ RSpec.describe Story, type: :model do
     end
   end
 
+  describe 'story associations' do
+    it "should have many hashtags" do
+      story = Story.reflect_on_association(:hashtags)
+      expect(story.macro).to eq(:has_and_belongs_to_many)
+    end
+  end
+
+  describe 'story validations' do
+    it 'Story content longer than 280 characters should throw an error' do
+      story = Story.create(content: "This is a very long story so that we can test the validations. It should throw an error since the story cannot be longer than 280 characters. Entering some other random stuff just to increase the number of characters and exceed the 280 limit. We chose 280 limit because this is the character limit of twitter.")
+      expect(story.errors[:content]).to eql(['is too long (maximum is 280 characters)'])
+    end
+    it "Empty story content should throw an error" do
+      story = Story.create(content: "")
+      expect(story.errors[:content]).to eql(["can't be blank"])
+    end
+  end
+
 end
