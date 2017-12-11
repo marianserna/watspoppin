@@ -28,7 +28,7 @@ Rails.application.configure do
 
 
   # the default url that the email comes from
-  config.action_mailer.default_url_options = { host: 'localhost:3000' }
+  config.action_mailer.default_url_options = { host: 'https://watspoppinapp.herokuapp.com/' }
   config.action_mailer.perform_caching = false
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
