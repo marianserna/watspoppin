@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root 'pages#main'
 
   resources :stories, only: [:new, :create] do
+    resources :like, module: :story
     collection do
       get :search
     end
