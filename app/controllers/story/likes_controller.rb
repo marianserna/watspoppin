@@ -1,23 +1,12 @@
 class Story::LikesController < ApplicationController
-  # before_action :authenticate_user!
+  skip_before_action :verify_authenticity_token
+  before_action :authenticate_user!
+  before_action :set_story
 
   def create
     @story.likes.where(user_id: current_user.id).first_or_create
 
-    respond_to do |format|
-      format.html { redirect_to @story }
-      format.js
-    end
-
-  def destroy
-    @story.likes.where(user_id: current_user.id).destroy_all
-
-    respond_to do |format|
-      format.html { redirect_to @story }
-      format.js
-    end
-  end
-
+    head :no_content
   end
 
   private

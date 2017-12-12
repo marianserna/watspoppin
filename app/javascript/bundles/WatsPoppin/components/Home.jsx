@@ -15,7 +15,8 @@ export default class Home extends React.Component {
     longitude: PropTypes.number.isRequired,
     stories: PropTypes.array.isRequired,
     trending_hashtags: PropTypes.array.isRequired,
-    user: PropTypes.object
+    user: PropTypes.object,
+    liked_story_ids: PropTypes.array.isRequired
   };
 
   /**
@@ -37,7 +38,8 @@ export default class Home extends React.Component {
         longitude: props.longitude
       },
       stories: props.stories,
-      current_view: 'list'
+      current_view: 'list',
+      liked_story_ids: props.liked_story_ids
     };
 
     this.socket = new Socket();
@@ -128,6 +130,12 @@ export default class Home extends React.Component {
     this.socket.subscription.perform('stop_realtime', {});
   };
 
+  likeStory = (storyId) => {
+    this.setState({
+      liked_story_ids: [...this.state.liked_story_ids, storyId]
+    });
+  };
+
   render() {
     return (
       <div className="home_container">
@@ -180,6 +188,8 @@ export default class Home extends React.Component {
             updateViewport={this.updateViewport}
             stories={this.state.stories}
             user={this.props.user}
+            liked_story_ids={this.state.liked_story_ids}
+            likeStory={this.likeStory}
           />
         </section>
 

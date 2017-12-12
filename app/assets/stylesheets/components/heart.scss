@@ -4,11 +4,16 @@
 
 .heart {
   fill: #212121;
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   margin-top: 15px;
+  transition: all 0.5s ease;
 
   &.hearted {
     fill: red;
+  }
+
+  &:hover {
+    cursor: pointer;
   }
 }

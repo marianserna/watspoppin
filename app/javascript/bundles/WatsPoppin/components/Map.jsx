@@ -13,7 +13,9 @@ class Map extends React.Component {
     viewport: PropTypes.object.isRequired,
     stories: PropTypes.array.isRequired,
     updateViewport: PropTypes.func.isRequired,
-    user: PropTypes.object
+    user: PropTypes.object,
+    liked_story_ids: PropTypes.array.isRequired,
+    likeStory: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -31,16 +33,13 @@ class Map extends React.Component {
   }
 
   getCurrentPosition = () => {
-    window.navigator.geolocation.getCurrentPosition(position => {
+    window.navigator.geolocation.getCurrentPosition((position) => {
       this.props.updateViewport({
         ...this.props.viewport,
         latitude: position.coords.latitude,
         longitude: position.coords.longitude
       });
-      this.props.updateCurrentPosition(
-        position.coords.latitude,
-        position.coords.longitude
-      );
+      this.props.updateCurrentPosition(position.coords.latitude, position.coords.longitude);
     });
   };
 
@@ -90,19 +89,20 @@ class Map extends React.Component {
           latitude={popupStory.latitude}
           onClose={() => this.setState({ popupStatus: null })}
         >
-          <StoryCard story={popupStory} />
+          <StoryCard
+            story={popupStory}
+            user={this.props.user}
+            liked_story_ids={this.props.liked_story_ids}
+            likeStory={this.props.likeStory}
+          />
         </Popup>
       );
     }
   };
 
-  renderStoryMarkers = () => {
-    return this.props.stories.map(story => (
-      <Marker
-        latitude={story.latitude}
-        longitude={story.longitude}
-        key={story.id}
-      >
+  renderStoryMarkers = () =>
+    this.props.stories.map(story => (
+      <Marker latitude={story.latitude} longitude={story.longitude} key={story.id}>
         <Pin
           fill="#00BCD4"
           onClick={() => {
@@ -114,7 +114,6 @@ class Map extends React.Component {
         />
       </Marker>
     ));
-  };
 
   componentWillMount() {
     this.getCurrentPosition();
@@ -128,7 +127,7 @@ class Map extends React.Component {
         height={this.props.containerHeight}
         mapboxApiAccessToken="pk.eyJ1IjoibWFyaWFuc2VybmEiLCJhIjoiY2phOGtrcW43MDg5MTJxbGl1Nzg3aDA3ZCJ9.xKp2gqw1gEz0d1fmutdUpw"
         mapStyle="mapbox://styles/marianserna/cj9niotu73i7t2rs1mt2t14sy"
-        onViewportChange={viewport => {
+        onViewportChange={(viewport) => {
           this.props.updateViewport(viewport);
         }}
       >
