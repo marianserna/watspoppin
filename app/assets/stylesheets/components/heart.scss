@@ -1,0 +1,14 @@
+.heart-container {
+  text-align: right;
+}
+
+.heart {
+  fill: #212121;
+  width: 30px;
+  height: 30px;
+  margin-top: 15px;
+
+  &.hearted {
+    fill: red;
+  }
+}
