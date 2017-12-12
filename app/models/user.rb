@@ -3,8 +3,6 @@ class User < ApplicationRecord
 
   validates_presence_of :name, :password
 
-
-
   has_many :stories
   has_many :services, dependent: :destroy
   has_many :likes
