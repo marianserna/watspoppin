@@ -16,7 +16,8 @@ RSpec.describe PagesController, type: :controller do
         longitude: -79.383184,
         stories: [story],
         trending_hashtags: ["#MooseOnTheLoose"],
-        user: nil
+        user: nil,
+        liked_story_ids: []
       })
     end
   end
