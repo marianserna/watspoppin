@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171130153030) do
+ActiveRecord::Schema.define(version: 20171212022545) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,13 @@ ActiveRecord::Schema.define(version: 20171130153030) do
     t.bigint "story_id"
     t.index ["hashtag_id"], name: "index_hashtags_stories_on_hashtag_id"
     t.index ["story_id"], name: "index_hashtags_stories_on_story_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "story_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "services", force: :cascade do |t|

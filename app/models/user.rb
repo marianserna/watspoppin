@@ -3,10 +3,9 @@ class User < ApplicationRecord
 
   validates_presence_of :name, :password
 
-
-
   has_many :stories
   has_many :services, dependent: :destroy
+  has_many :likes
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and
   devise :database_authenticatable, :registerable,
@@ -35,6 +34,8 @@ class User < ApplicationRecord
    @graph.put_wall_post(wall_post)
  end
 
-
+ def likes?(story)
+   story.likes.where(user_id: id).any?
+ end
 
 end

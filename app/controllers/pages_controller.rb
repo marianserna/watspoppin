@@ -13,7 +13,8 @@ class PagesController < ApplicationController
       longitude: longitude,
       stories: Story.near([latitude, longitude]).reorder(id: :desc).limit(100),
       trending_hashtags: twitter_trends.trends,
-      user: current_user
+      user: current_user,
+      liked_story_ids: current_user ? current_user.likes.pluck(:story_id) : []
     }
   end
 
