@@ -19,6 +19,6 @@ Tasks:
 
 * Marian Serna - Full Stack. Project Manager. In charge of real time functionality using the Twitter
   api, action cable, and google places api. Used celluloid::io for async functionality in rails.
-  Designed site, implemented react on rails setup, developed the front end. Tested front end with
-  Jest + Enzyme + Sinon as well as back end using Rspec and Factory Bot. Deployed to Heroku and set
-  up rake tasks for db reset every 24 hours.
+  Designed site, implemented react on rails setup, developed the front end, handled images. Tested
+  front end with Jest + Enzyme + Sinon as well as back end using Rspec and Factory Bot. Deployed to
+  Heroku and set up rake tasks for db reset every 24 hours.
