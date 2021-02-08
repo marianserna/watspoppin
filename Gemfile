@@ -36,7 +36,7 @@ gem 'react_on_rails', '~> 10.0', '>= 10.0.2'
 # gem 'capistrano-rails', group: :development
 gem 'fog-aws', '~> 1.4', '>= 1.4.1'
 gem 'mini_magick', '~> 4.8'
-gem 'carrierwave', '~> 1.2', '>= 1.2.1'
+gem 'carrierwave', '~> 1.3'
 gem 'geocoder', '~> 1.4', '>= 1.4.4'
 gem 'celluloid-io', '~> 0.17.3'
 gem 'twitter', '~> 6.2'
